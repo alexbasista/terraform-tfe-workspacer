@@ -3,7 +3,7 @@ resource "tfe_variable" "tfvars" {
 
   workspace_id = tfe_workspace.ws.id
   key          = each.key
-  value        = jsonencode(each.value)
+  value        = try(tostring(each.value), "nostring") == "nostring" ? jsonencode(each.value) : tostring(each.value)
   description  = "Managed by TFE Terraform provider."
   hcl          = try(tostring(each.value), "nostring") == "nostring" ? true : false
   sensitive    = false
@@ -15,7 +15,7 @@ resource "tfe_variable" "tfvars_sensitive" {
 
   workspace_id = tfe_workspace.ws.id
   key          = each.key
-  value        = jsonencode(each.value)
+  value        = try(tostring(each.value), "nostring") == "nostring" ? jsonencode(each.value) : tostring(each.value)
   description  = "Managed by TFE Terraform provider."
   hcl          = try(tostring(each.value), "nostring") == "nostring" ? true : false
   sensitive    = true
@@ -27,7 +27,7 @@ resource "tfe_variable" "envvars" {
 
   workspace_id = tfe_workspace.ws.id
   key          = each.key
-  value        = jsonencode(each.value)
+  value        = each.value
   description  = "Managed by TFE Terraform provider."
   hcl          = false
   sensitive    = false
@@ -39,7 +39,7 @@ resource "tfe_variable" "envvars_sensitive" {
 
   workspace_id = tfe_workspace.ws.id
   key          = each.key
-  value        = jsonencode(each.value)
+  value        = each.value
   description  = "Managed by TFE Terraform provider."
   hcl          = false
   sensitive    = true

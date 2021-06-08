@@ -19,4 +19,18 @@ module "tfe-workspace" {
       cidr_range_list = ["1", "2", "3"]
       testmap         = { "a" = "1", "b" = "2"}
   }
+
+  tfvars_sensitive = {
+      secret      = "secret2"
+      secret_list = ["one", "two", "three"]
+      secret_map  = {"x" = "4", "y" = "5", "z" = "6"}
+  }
+
+  envvars = {
+      AWS_ACCESS_KEY_ID = "abcdefghijklmnop"
+  }
+
+  envvars_sensitive = {
+      AWS_SECRET_ACCESS_KEY = "123456789"
+  }
 }

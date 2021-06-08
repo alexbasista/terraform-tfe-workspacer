@@ -113,13 +113,13 @@ variable "tfvars_sensitive" {
 }
 
 variable "envvars" {
-  type        = any
+  type        = map(string)
   description = "Map of Environment variables to add to the Workspace."
   default     = {}
 }
 
 variable "envvars_sensitive" {
-  type        = any
+  type        = map(string)
   description = "Map of sensitive Environment variables to add to the Workspace."
   default     = {}
 }
