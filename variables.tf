@@ -1,3 +1,4 @@
+### --- Workspace --- ###
 variable "organization" {
   type        = string
   description = "Organization to create Workspace in."
@@ -79,10 +80,48 @@ variable "file_triggers_enabled" {
   default     = true
 }
 
+variable "trigger_prefixes" {
+  type        = list(string)
+  description = "List of paths relative to the root of the VCS repo to filter on when `file_triggers_enabled` is `true`."
+  default     = null
+}
+
 variable "speculative_enabled" {
   type        = bool
   description = "Boolean to allow Speculative Plans on the Workspace."
   default     = true
+}
+
+### --- Team Access --- ###
+variable "team_name" {
+  type = string
+  description = "Name of existing Team to grant Workspace access to."
+  default = null
+}
+
+### --- Workspace Variables --- ###
+variable "tfvars" {
+  type        = any
+  description = "Map of Terraform variables to add to the Workspace."
+  default     = {}
+}
+
+variable "tfvars_sensitive" {
+  type        = any
+  description = "Map of sensitive Terraform variables to add to the Workspace."
+  default     = {}
+}
+
+variable "envvars" {
+  type        = any
+  description = "Map of Environment variables to add to the Workspace."
+  default     = {}
+}
+
+variable "envvars_sensitive" {
+  type        = any
+  description = "Map of sensitive Environment variables to add to the Workspace."
+  default     = {}
 }
 
 
