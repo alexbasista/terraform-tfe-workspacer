@@ -11,26 +11,26 @@ module "tfe-workspace" {
   source = "../.."
 
   organization   = "terraform-tom"
-  workspace_name = "ws-mod-dev-test-1"
-  workspace_desc = "Developing new Terraform module."
+  workspace_name = "terraform-tfe-workspacer-no-vcs-test"
+  workspace_desc = "Terraform module CI testing."
 
   tfvars = {
-      instance_size   = "t2.micro"
-      cidr_range_list = ["1", "2", "3"]
-      testmap         = { "a" = "1", "b" = "2"}
+      teststring = "iamstring"
+      testlist   = ["1", "2", "3"]
+      testmap    = { "a" = "1", "b" = "2", "c" = "3"}
   }
 
   tfvars_sensitive = {
-      secret      = "secret2"
-      secret_list = ["one", "two", "three"]
-      secret_map  = {"x" = "4", "y" = "5", "z" = "6"}
+      secret      = "secstring"
+      secret_list = ["sec1", "sec2", "sec3"]
+      secret_map  = {"x" = "sec4", "y" = "sec5", "z" = "sec6"}
   }
 
   envvars = {
-      AWS_ACCESS_KEY_ID = "abcdefghijklmnop"
+      AWS_ACCESS_KEY_ID = "ABCDEFGHIJKLMNOPQRST"
   }
 
   envvars_sensitive = {
-      AWS_SECRET_ACCESS_KEY = "123456789"
+      AWS_SECRET_ACCESS_KEY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$"
   }
 }
