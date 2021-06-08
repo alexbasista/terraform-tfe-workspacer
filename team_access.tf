@@ -9,7 +9,7 @@ resource "tfe_team_access" "managed" {
   for_each = var.team_access
 
   workspace_id = tfe_workspace.ws.id
-  team_id      = [for team in [data.tfe_team.managed[each.key]] : team.id if team.name == each.key][0]
+  team_id      = [for t in [data.tfe_team.managed[each.key]] : t.id if t.name == each.key][0]
   access       = each.value
 }
 
@@ -24,7 +24,7 @@ resource "tfe_team_access" "custom" {
   for_each = var.custom_team_access
 
   workspace_id = tfe_workspace.ws.id
-  team_id      = [for team in [data.tfe_team.custom[each.key]] : team.id if team.name == each.key][0]
+  team_id      = [for t in [data.tfe_team.custom[each.key]] : t.id if t.name == each.key][0]
 
   permissions {
     runs              = lookup(each.value, "runs", "read")
