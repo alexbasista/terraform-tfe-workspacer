@@ -52,7 +52,7 @@ variable "global_remote_state" {
 
 variable "remote_state_consumer_ids" {
   type        = list(string)
-  description = "List of existing Workspace IDs allowed to access the Remote State of this Workspace."
+  description = "List of existing Workspace IDs allowed to access the Remote State of Workspace."
   default     = null
 }
 
@@ -108,25 +108,25 @@ variable "team_name" {
 ### --- Workspace Variables --- ###
 variable "tfvars" {
   type        = any
-  description = "Map of Terraform variables to add to the Workspace."
+  description = "Map of Terraform variables to add to Workspace."
   default     = {}
 }
 
 variable "tfvars_sensitive" {
   type        = any
-  description = "Map of sensitive Terraform variables to add to the Workspace."
+  description = "Map of sensitive Terraform variables to add to Workspace."
   default     = {}
 }
 
 variable "envvars" {
   type        = map(string)
-  description = "Map of Environment variables to add to the Workspace."
+  description = "Map of Environment variables to add to Workspace."
   default     = {}
 }
 
 variable "envvars_sensitive" {
   type        = map(string)
-  description = "Map of sensitive Environment variables to add to the Workspace."
+  description = "Map of sensitive Environment variables to add to Workspace."
   default     = {}
 }
 
