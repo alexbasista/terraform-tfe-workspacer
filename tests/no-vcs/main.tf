@@ -5,6 +5,8 @@ terraform {
       version = "0.25.3"
     }
   }
+
+  experiments = [module_variable_optional_attrs]
 }
 
 module "tfe-workspace" {
@@ -59,11 +61,25 @@ module "tfe-workspace" {
 
   notifications = [
     {
-      name             = "test-notification"
+      name             = "test-notification-generic"
       destination_type = "generic"
       url              = "http://example.com/tfe-notifications-api"
       token            = "abcdefg123456789"
-      triggers         = []
+      triggers         = ["run:needs_attention"]
+      enabled          = true
+    },
+    {
+      name             = "test-notification-email"
+      destination_type = "email"
+      email_user_ids   = ["abasista"]
+      triggers         = ["run:completed", "run:errored"]
+      enabled          = true
+    },
+    {
+      name             = "test-notification-slack"
+      destination_type = "slack"
+      url              = "https://hooks.slack.com/test"
+      triggers         = ["run:completed", "run:errored"]
       enabled          = true
     }
   ]

@@ -153,10 +153,10 @@ variable "notifications" {
       {
         name             = string
         destination_type = string
-        url              = string
-        token            = string
-        email_addresses  = list(string)
-        email_user_ids   = list(string)
+        url              = optional(string)
+        token            = optional(string)
+        email_addresses  = optional(list(string))
+        email_user_ids   = optional(list(string))
         triggers         = list(string)
         enabled          = bool
       }
