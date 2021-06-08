@@ -15,12 +15,28 @@ terraform {
 }
 
 module "tfe-workspace" {
-  source = "../.."
+  source = "https://github.com/alexbasista/terraform-tfe-workspacer"
 
-  organization   = "terraform-tom"
-  workspace_name = "terraform-tfe-workspacer-no-vcs-test"
-  workspace_desc = "Terraform module CI testing."
+  organization   = "my-tfe-org"
+  workspace_name = "my-new-tfe-ws"
+  workspace_desc = "Description of my new TFE Workspace."
 
+  tfvars = {
+    teststring = "iamstring"
+    testlist   = ["1", "2", "3"]
+    testmap    = { "a" = "1", "b" = "2", "c" = "3" }
+  }
+}
+```
+
+### With VCS
+
+### Workspace Variables
+This modules strives to make defining and creating Workspace Variables as streamlined as possible and closer to the `terraform.tfvars` user experience of key/value pairs. There are four different input variables available to create Workspace Variables.
+
+#### Terraform Variables
+`tfvars` accepts a map of key/value pairs of any type, and `tfvars_sensitive` is the same except it will also mark the variable(s) as sensitive upon creation.
+```hcl
   tfvars = {
     teststring = "iamstring"
     testlist   = ["1", "2", "3"]
@@ -28,11 +44,15 @@ module "tfe-workspace" {
   }
 
   tfvars_sensitive = {
-    secret      = "secstring"
+    secret      = "securestring"
     secret_list = ["sec1", "sec2", "sec3"]
     secret_map  = { "x" = "sec4", "y" = "sec5", "z" = "sec6" }
   }
+```
 
+#### Environment Variables
+`envvars` accepts a map of strings, and `envvars_sensitive` is the same except it will also mark the variable(s) as sensitive upon creation.
+```hcl
   envvars = {
     AWS_ACCESS_KEY_ID = "ABCDEFGHIJKLMNOPQRST"
   }
@@ -40,20 +60,13 @@ module "tfe-workspace" {
   envvars_sensitive = {
     AWS_SECRET_ACCESS_KEY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$"
   }
-}
 ```
-
-### Basic
-
-### With VCS
-
-### Workspace Variables
 
 ### Team Access
 To add RBAC to the Workspace, there are two options. 
 
 #### Built-In Permissions
-The `team_access` input variable accepts a map of strings; in this case each key/value pair being the existing Team name and built-in permission level.
+The `team_access` input variable accepts a map of strings whereby each key/value pair is the existing Team name and built-in permission level.
 
 ```hcl
   team_access = {
@@ -64,7 +77,7 @@ The `team_access` input variable accepts a map of strings; in this case each key
 ```
 
 #### Custom Permissions
-The `custom_team_access` input variable accepts a map of objects; in this case each object being five key/value pairs of custom permissions levels. The way the TFE provider and API work, all five of the key/value pairs must be specified together when using.
+The `custom_team_access` input variable accepts a map of objects whereby each object represents a set of custom team permission levels. The object key is the existing Team name.  The way the TFE provider and API currently work, all five of the object attributes must be specified together when using.
 
 ```hcl
   custom_team_access = {
@@ -86,7 +99,7 @@ The `custom_team_access` input variable accepts a map of objects; in this case e
 ```
 
 ### Notifications
-To create notifications, the `notifications` input variable accepts a list of objects; in this case each object being a notification configuration.
+To create notifications, the `notifications` input variable accepts a list of objects, whereby each object is a notification configuration.
 
 ```hcl
   notifications = [
