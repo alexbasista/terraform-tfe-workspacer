@@ -117,7 +117,7 @@ variable "custom_team_access" {
       }
     )
   )
-  description = "Map of existing Team(s) and custom permissions to grant on Workspace."
+  description = "Map of existing Team(s) and custom permissions to grant on Workspace. If used, all keys in the object must be specified."
   default     = {}
 }
 

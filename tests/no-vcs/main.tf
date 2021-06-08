@@ -48,5 +48,12 @@ module "tfe-workspace" {
       sentinel_mocks    = "read"
       workspace_locking = true
     }
+    "custom-team-perms" = {
+      runs              = "read"
+      variables         = "write"
+      state_versions    = "read"
+      sentinel_mocks    = "none"
+      workspace_locking = false
+    }
   }
 }
