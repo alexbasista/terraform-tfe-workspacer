@@ -42,7 +42,7 @@ module "tfe-workspace" {
 
   custom_team_access = {
     "new-team" = {
-      runs = "read"
+      runs              = "read"
       variables         = "read"
       state_versions    = "read-outputs"
       sentinel_mocks    = "read"
