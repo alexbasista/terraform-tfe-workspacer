@@ -56,4 +56,15 @@ module "tfe-workspace" {
       workspace_locking = false
     }
   }
+
+  notifications = [
+    {
+      name             = "test-notification"
+      destination_type = "generic"
+      url              = "http://example.com/tfe-notifications-api"
+      token            = "abcdefg123456789"
+      triggers         = []
+      enabled          = true
+    }
+  ]
 }

@@ -146,4 +146,24 @@ variable "envvars_sensitive" {
   default     = {}
 }
 
+### --- Notifications --- ###
+variable "notifications" {
+  type = list(
+    object(
+      {
+        name             = string
+        destination_type = string
+        url              = string
+        token            = string
+        email_addresses  = list(string)
+        email_user_ids   = list(string)
+        triggers         = list(string)
+        enabled          = bool
+      }
+    )
+  )
+  description = "List of Notification objects to configure on Workspace."
+  default     = []
+}
+
 
