@@ -101,13 +101,23 @@ variable "speculative_enabled" {
 ### --- Team Access --- ###
 variable "team_access" {
   type        = map(string)
-  description = "Map of existing Team(s) and access levels to grant on Workspace."
+  description = "Map of existing Team(s) and built-in permissions to grant on Workspace."
   default     = {}
 }
 
 variable "custom_team_access" {
-  type        = map(string)
-  description = "Map of existing Team(s) and custom access levels to grant on Workspace."
+  type = map(
+    object(
+      {
+        runs              = string
+        variables         = string
+        state_versions    = string
+        sentinel_mocks    = string
+        workspace_locking = bool
+      }
+    )
+  )
+  description = "Map of existing Team(s) and custom permissions to grant on Workspace."
   default     = {}
 }
 
