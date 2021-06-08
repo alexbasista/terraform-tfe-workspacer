@@ -5,10 +5,12 @@ data "tfe_team" "rbac" {
   organization = var.organization
 }
 
-resource "tfe_team_access" "rbac" {
+resource "tfe_team_access" "managed" {
   count = var.team_name != null ? 1 : 0
 
   workspace_id = tfe_workspace.ws.id
   team_id      = data.tfe_team.rbac[0].id
   access       = "read"
 }
+
+resource "tfe_team_access" "custom" {}

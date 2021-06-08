@@ -14,6 +14,12 @@ module "tfe-workspace" {
   workspace_name = "terraform-tfe-workspacer-with-vcs-test"
   workspace_desc = "Terraform module CI testing."
 
+  vcs_repo {
+    identifier     = "alexbasista/terraform-tfe-workspacer"
+    branch         = "main"
+    oauth_token_id = var.oauth_token_id
+  }
+  
   tfvars = {
       teststring = "iamstring"
       testlist   = ["1", "2", "3"]
