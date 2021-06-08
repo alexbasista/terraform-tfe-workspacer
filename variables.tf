@@ -62,6 +62,12 @@ variable "ssh_key_id" {
   default     = null
 }
 
+variable "allow_destroy_plan" {
+  type        = bool
+  description = "Boolean setting to allow destroy plans on Workspace."
+  default     = true
+}
+
 variable "vcs_repo" {
   type        = map(string)
   description = "Map of settings to connect Workspace to VCS repository."

@@ -9,6 +9,7 @@ resource "tfe_workspace" "ws" {
   global_remote_state       = var.global_remote_state
   remote_state_consumer_ids = var.remote_state_consumer_ids
   ssh_key_id                = var.ssh_key_id
+  allow_destroy_plan        = var.allow_destroy_plan 
 
   dynamic "vcs_repo" {
     for_each = lookup(var.vcs_repo, "identifier", null) == null ? [] : [var.vcs_repo]
