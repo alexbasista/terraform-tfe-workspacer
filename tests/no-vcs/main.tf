@@ -33,4 +33,10 @@ module "tfe-workspace" {
   envvars_sensitive = {
       AWS_SECRET_ACCESS_KEY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$"
   }
+
+  team_access = {
+    "test-invisible" = "read"
+    "github-actions" = "write"
+    "test"           = "admin"
+  }
 }

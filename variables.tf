@@ -99,10 +99,16 @@ variable "speculative_enabled" {
 }
 
 ### --- Team Access --- ###
-variable "team_name" {
-  type = string
-  description = "Name of existing Team to grant Workspace access to."
-  default = null
+variable "team_access" {
+  type        = map(string)
+  description = "Map of existing Team(s) and access levels to grant on Workspace."
+  default     = {}
+}
+
+variable "custom_team_access" {
+  type        = map(string)
+  description = "Map of existing Team(s) and custom access levels to grant on Workspace."
+  default     = {}
 }
 
 ### --- Workspace Variables --- ###
