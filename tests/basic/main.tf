@@ -5,20 +5,16 @@ terraform {
       version = "0.25.3"
     }
   }
+
+  experiments = [module_variable_optional_attrs]
 }
 
 module "tfe-workspace" {
   source = "../.."
 
   organization   = "terraform-tom"
-  workspace_name = "terraform-tfe-workspacer-with-vcs-test"
+  workspace_name = "terraform-tfe-workspacer-basic-test"
   workspace_desc = "Terraform module CI testing."
-  
-  vcs_repo = {
-    identifier     = "alexbasista/terraform-random-thrones"
-    branch         = "master"
-    oauth_token_id = "ot-Mp48FwPYVbjSKnqd"
-  }
 
   tfvars = {
     teststring = "iamstring"
@@ -29,7 +25,7 @@ module "tfe-workspace" {
   tfvars_sensitive = {
     secret      = "secstring"
     secret_list = ["sec1", "sec2", "sec3"]
-    secret_map  = {"x" = "sec4", "y" = "sec5", "z" = "sec6"}
+    secret_map  = { "x" = "sec4", "y" = "sec5", "z" = "sec6" }
   }
 
   envvars = {
@@ -38,5 +34,11 @@ module "tfe-workspace" {
 
   envvars_sensitive = {
     AWS_SECRET_ACCESS_KEY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$"
+  }
+
+  team_access = {
+    "test-invisible" = "read"
+    "github-actions" = "write"
+    "test"           = "admin"
   }
 }

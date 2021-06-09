@@ -13,7 +13,7 @@ module "tfe-workspace" {
   source = "../.."
 
   organization   = "terraform-tom"
-  workspace_name = "terraform-tfe-workspacer-no-vcs-test"
+  workspace_name = "terraform-tfe-workspacer-full-test"
   workspace_desc = "Terraform module CI testing."
 
   tfvars = {
@@ -70,6 +70,7 @@ module "tfe-workspace" {
   ]
 
   run_trigger_source_workspaces = [
-    "my-new-ws"
+    "my-new-ws",
+    "new-ui-beta"
   ]
 }

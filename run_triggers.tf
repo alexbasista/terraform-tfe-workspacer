@@ -9,7 +9,3 @@ resource "tfe_run_trigger" "rt" {
   workspace_id  = tfe_workspace.ws.id
   sourceable_id = each.value
 }
-
-output "run_trigger_workspace_ids" {
-  value = data.tfe_workspace_ids.rt.ids
-}
