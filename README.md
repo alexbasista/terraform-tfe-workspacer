@@ -30,17 +30,18 @@ module "tfe-workspace" {
 ```
 
 ### With VCS
-The optional `vcs_repo` input variable expects a map of strings
+The optional `vcs_repo` input variable expects a map of key/value pairs with up to four attributes (`branch` and `ingress_submodules` are optional).
 ```hcl
   vcs_repo = {
-    identifier     = "alexbasista/terraform-tfe-workspacer"
-    branch         = "main"
-    oauth_token_id = "ot-abcdefg123456789"
+    identifier         = "<VCS organization>/<VCS repository>"
+    branch             = "main"
+    oauth_token_id     = "ot-abcdefg123456789"
+    ingress_submodules = false
   }
 ```
 
 ### Workspace Variables
-This modules strives to make defining and creating Workspace Variables as streamlined as possible and closer to the `terraform.tfvars` user experience of key/value pairs. There are four different optional input variables available to create Workspace Variables.
+This modules strives to make defining and creating Workspace Variables as streamlined as possible and closer to the TF OSS `terraform.tfvars` user experience of key/value pairs. There are four different optional input variables available to create Workspace Variables.
 
 #### Terraform Variables
 `tfvars` accepts a map of key/value pairs of any type, and `tfvars_sensitive` is the same except it will also mark the variable(s) as sensitive upon creation.
