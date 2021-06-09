@@ -117,7 +117,7 @@ To optionally create notifications, the `notifications` input variable accepts a
     {
       name             = "test-notification-generic"
       destination_type = "generic"
-      url              = "http://example.com/tfe-notifications-api"
+      url              = "http://example.com/receive-notifications-api"
       token            = "abcdefg123456789"
       triggers         = ["run:needs_attention"]
       enabled          = true
@@ -132,7 +132,7 @@ To optionally create notifications, the `notifications` input variable accepts a
     {
       name             = "test-notification-slack"
       destination_type = "slack"
-      url              = "https://hooks.slack.com/test"
+      url              = "https://hooks.slack.com/example"
       triggers         = ["run:completed", "run:errored"]
       enabled          = true
     }
