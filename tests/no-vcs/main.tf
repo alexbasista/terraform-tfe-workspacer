@@ -68,4 +68,8 @@ module "tfe-workspace" {
       enabled          = true
     }
   ]
+
+  run_trigger_source_workspaces = [
+    "my-new-ws"
+  ]
 }

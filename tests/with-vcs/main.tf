@@ -11,7 +11,7 @@ module "tfe-workspace" {
   source = "../.."
 
   organization   = "terraform-tom"
-  workspace_name = "terraform-tfe-workspacer-no-vcs-test"
+  workspace_name = "terraform-tfe-workspacer-with-vcs-test"
   workspace_desc = "Terraform module CI testing."
   
   vcs_repo = {
@@ -62,4 +62,13 @@ module "tfe-workspace" {
       workspace_locking = false
     }
   }
+
+  run_trigger_source_workspaces = [
+    "my-new-ws",
+    "new-ui-beta"
+  ]
+}
+
+output "w" {
+  value = module.tfe-workspace.run_trigger_workspace_ids
 }
