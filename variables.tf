@@ -166,4 +166,10 @@ variable "notifications" {
   default     = []
 }
 
+### --- Run Triggers --- ###
+variable "run_trigger_source_workspaces" {
+  type        = list(string)
+  description = "List of Workspace names that will trigger runs in this Workspace."
+  default     = []
+}
 

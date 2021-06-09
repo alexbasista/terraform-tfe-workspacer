@@ -23,17 +23,13 @@ module "tfe-workspace" {
   tfvars = {
     teststring = "iamstring"
     testlist   = ["1", "2", "3"]
-    testmap    = {
-                  "a"="1"
-                  "b"="2"
-                  "c"="3"
-                }
+    testmap    = { "a" = "1", "b" = "2", "c" = { "nest1key" = "nest1value"} }
   }
 
   tfvars_sensitive = {
     secret      = "secstring"
     secret_list = ["sec1", "sec2", "sec3"]
-    #secret_map  = {"x" = "sec4", "y" = "sec5", "z" = "sec6"}
+    secret_map  = {"x" = "sec4", "y" = "sec5", "z" = "sec6"}
   }
 
   envvars = {
