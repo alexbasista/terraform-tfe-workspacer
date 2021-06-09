@@ -30,9 +30,17 @@ module "tfe-workspace" {
 ```
 
 ### With VCS
+The optional `vcs_repo` input variable expects a map of strings
+```hcl
+  vcs_repo {
+    identifier     = "alexbasista/terraform-tfe-workspacer"
+    branch         = "main"
+    oauth_token_id = var.oauth_token_id
+  }
+```
 
 ### Workspace Variables
-This modules strives to make defining and creating Workspace Variables as streamlined as possible and closer to the `terraform.tfvars` user experience of key/value pairs. There are four different input variables available to create Workspace Variables.
+This modules strives to make defining and creating Workspace Variables as streamlined as possible and closer to the `terraform.tfvars` user experience of key/value pairs. There are four different optional input variables available to create Workspace Variables.
 
 #### Terraform Variables
 `tfvars` accepts a map of key/value pairs of any type, and `tfvars_sensitive` is the same except it will also mark the variable(s) as sensitive upon creation.
@@ -63,7 +71,7 @@ This modules strives to make defining and creating Workspace Variables as stream
 ```
 
 ### Team Access
-To add RBAC to the Workspace, there are two options. 
+To optionally add RBAC to the Workspace, there are two options. 
 
 #### Built-In Permissions
 The `team_access` input variable accepts a map of strings whereby each key/value pair is the existing Team name and built-in permission level.
@@ -99,7 +107,7 @@ The `custom_team_access` input variable accepts a map of objects whereby each ob
 ```
 
 ### Notifications
-To create notifications, the `notifications` input variable accepts a list of objects, whereby each object is a notification configuration.
+To optionally create notifications, the `notifications` input variable accepts a list of objects, whereby each object is a notification configuration.
 
 ```hcl
   notifications = [

@@ -3,7 +3,7 @@ resource "tfe_variable" "tfvars" {
 
   workspace_id = tfe_workspace.ws.id
   key          = each.key
-  value        = try(tostring(each.value), "nostring") == "nostring" ? jsonencode(each.value) : tostring(each.value)
+  value        = try(tostring(each.value), "nostring") == "nostring" ? replace(jsonencode(each.value), ":", "=") : tostring(each.value)
   description  = "Managed by TFE Terraform provider."
   hcl          = try(tostring(each.value), "nostring") == "nostring" ? true : false
   sensitive    = false
