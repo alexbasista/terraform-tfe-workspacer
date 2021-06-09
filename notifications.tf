@@ -1,4 +1,4 @@
-resource "tfe_notification_configuration" "note" {
+resource "tfe_notification_configuration" "nc" {
   for_each = {for i, n in var.notifications: i => n}
 
   workspace_id     = tfe_workspace.ws.id
