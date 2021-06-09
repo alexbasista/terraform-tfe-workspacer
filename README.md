@@ -1,5 +1,5 @@
 # terraform-tfe-workspacer
-Terraform module to create and configure Workspaces in Terraform Cloud/Enterprise.
+Terraform module to create and configure a Workspace in Terraform Cloud/Enterprise.
 
 ## Usage
 ```hcl
@@ -28,6 +28,8 @@ module "tfe-workspace" {
   }
 }
 ```
+
+See the [tests](./tests) directory for more examples, and visit the sections below for optional configurations/features.
 
 ### With VCS
 The optional `vcs_repo` input variable expects a map of key/value pairs with up to four attributes (`branch` and `ingress_submodules` are optional).
