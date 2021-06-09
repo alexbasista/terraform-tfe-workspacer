@@ -32,10 +32,10 @@ module "tfe-workspace" {
 ### With VCS
 The optional `vcs_repo` input variable expects a map of strings
 ```hcl
-  vcs_repo {
+  vcs_repo = {
     identifier     = "alexbasista/terraform-tfe-workspacer"
     branch         = "main"
-    oauth_token_id = var.oauth_token_id
+    oauth_token_id = "ot-abcdefg123456789"
   }
 ```
 
