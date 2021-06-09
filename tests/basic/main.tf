@@ -29,11 +29,11 @@ module "tfe-workspace" {
   }
 
   envvars = {
-    AWS_ACCESS_KEY_ID = "ABCDEFGHIJKLMNOPQRST"
+    AWS_ACCESS_KEY_ID = "THISISNOTAREALACCESSKEY"
   }
 
   envvars_sensitive = {
-    AWS_SECRET_ACCESS_KEY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$"
+    AWS_SECRET_ACCESS_KEY = "THISISNOTAREALSECRETKEY123!@#"
   }
 
   team_access = {
