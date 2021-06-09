@@ -141,4 +141,11 @@ To optionally create notifications, the `notifications` input variable accepts a
 ```
 
 ### Run Triggers
-Coming soon.
+To optionally add Run Triggers, the `run_trigger_source_workspaces` input variable accepts a list of Workspace names.
+
+```hcl
+  run_trigger_source_workspaces = [
+    "base-networking-ws",
+    "base-iam-ws"
+  ]
+```
