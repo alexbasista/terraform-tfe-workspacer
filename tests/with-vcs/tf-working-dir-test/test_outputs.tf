@@ -9,3 +9,7 @@ output "secretstring" {
 output "testlist" {
     value = random_shuffle.testlist.result
 }
+
+output "secretlist" {
+    value = random_shuffle.seclist.result
+}

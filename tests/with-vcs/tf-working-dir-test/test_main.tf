@@ -16,3 +16,10 @@ resource "random_shuffle" "testlist" {
         upper(i)
     ]
 }
+
+resource "random_shuffle" "seclist" {
+    input = [
+        for i in var.secretlist:
+        upper(i)
+    ]
+}
