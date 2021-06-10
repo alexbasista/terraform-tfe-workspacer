@@ -29,9 +29,9 @@ module "tfe-workspace" {
   }
 
   tfvars_sensitive = {
-    secret     = "secstring"
-    secretlist = ["sec1", "sec2", "sec3"]
-    secretmap  = {"x" = "sec4", "y" = "sec5", "z" = "sec6"}
+    secretstring = "secstring"
+    secretlist   = ["sec1", "sec2", "sec3"]
+    secretmap    = {"x" = "sec4", "y" = "sec5", "z" = "sec6"}
   }
 
   envvars = {
