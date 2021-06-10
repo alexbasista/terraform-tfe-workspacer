@@ -4,3 +4,4 @@ resource "random_shuffle" "testlist" {
         upper(i)
     ]
 }
+#
