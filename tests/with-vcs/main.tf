@@ -17,7 +17,7 @@ module "tfe-workspace" {
   vcs_repo = {
     identifier     = "alexbasista/terraform-tfe-workspacer"
     branch         = "initial"
-    oauth_token_id = "ot-Mp48FwPYVbjSKnqd"
+    oauth_token_id = var.oauth_token_id
   }
 
   working_directory = "/tests/with-vcs/tf-working-dir-test"
