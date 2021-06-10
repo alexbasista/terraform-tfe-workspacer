@@ -8,23 +8,27 @@ variable "testlist" {
   description = "List variable test."
 }
 
-variable "testmap" {
-  type = map(
-    object(
-      {
-        a = string
-        b = number
-        c = map(object(
-          {
-            nest1key = string
-          }
-          )
-        )
-      }
-    )
-  )
+# variable "testmap" {
+#   type = map(
+#     object(
+#       {
+#         a = string
+#         b = number
+#         c = map(object(
+#           {
+#             nest1key = string
+#           }
+#           )
+#         )
+#       }
+#     )
+#   )
 
-  description = "Map of objects variable test."
+#   description = "Map of objects variable test."
+# }
+
+variable "testmap" {
+  type = map(string)
 }
 
 variable "secret" {

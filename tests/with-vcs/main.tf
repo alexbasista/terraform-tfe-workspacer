@@ -25,7 +25,7 @@ module "tfe-workspace" {
   tfvars = {
     teststring = "iamstring"
     testlist   = ["one", "two", "three"]
-    testmap    = { a = "1", b = 2, c = { nest1key = "nest1value"} }
+    testmap    = { a = "1", b = "2", c = "3" }
   }
 
   tfvars_sensitive = {
