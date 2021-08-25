@@ -17,6 +17,7 @@ module "tfe-workspace" {
   organization      = "tfeadmin"
   workspace_name    = "tfe-workspacer-module-with-vcs-test"
   workspace_desc    = "Terraform TFE Workspacer module CI testing."
+  auto_apply        = true
   working_directory = "/tests/with-vcs/tf-working-dir-test"
 
   vcs_repo = {
