@@ -14,8 +14,12 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
+provider "tfe" {
+  hostname = my-tfe-instance.com
+}
+
 module "tfe-workspace" {
-  source = "https://github.com/alexbasista/terraform-tfe-workspacer"
+  source = "github.com/alexbasista/terraform-tfe-workspacer"
 
   organization   = "my-tfe-org"
   workspace_name = "my-new-tfe-ws"
@@ -28,8 +32,10 @@ module "tfe-workspace" {
   }
 }
 ```
+> Note: Setting a `TFE_TOKEN` environment variable is the recommended approach for the TFE provider auth.
+<p>&nbsp;</p>
 
-See the [tests](./tests) directory for more examples, and visit the sections below for optional configurations/features.
+See the [tests](./tests) directory for more detailed examples, and see the below sections for optional configurations/features.
 
 ### With VCS
 The optional `vcs_repo` input variable expects a map of key/value pairs with up to four attributes (`branch` and `ingress_submodules` are optional).
@@ -149,3 +155,8 @@ To optionally add Run Triggers, the `run_trigger_source_workspaces` input variab
     "base-iam-ws"
   ]
 ```
+<p>&nbsp;</p>
+
+## Disclaimer
+
+## Limitations
