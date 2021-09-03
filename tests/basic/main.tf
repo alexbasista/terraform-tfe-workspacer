@@ -20,18 +20,6 @@ module "tfe-workspace" {
   workspace_name = "tfe-workspacer-module-basic-test"
   workspace_desc = "Terraform TFE Workspacer module basic CI test."
 
-  tfvars = {
-    teststring = "iamstring"
-    testlist   = ["1", "2", "3"]
-    testmap    = { "a" = "1", "b" = "2", "c" = { "nest1key" = "nest1value" } }
-  }
-
-  tfvars_sensitive = {
-    secret      = "secstring"
-    secret_list = ["sec1", "sec2", "sec3"]
-    secret_map  = { "x" = "sec4", "y" = "sec5", "z" = "sec6" }
-  }
-
   envvars = {
     AWS_ACCESS_KEY_ID = "THISISNOTAREALACCESSKEY"
   }
