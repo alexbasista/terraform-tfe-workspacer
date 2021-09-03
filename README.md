@@ -161,4 +161,4 @@ This module currently uses the experimental feature [Optional Object Type Attrib
 <p>&nbsp;</p>
 
 ## Limitations
-- Due to some current provider-interfacing/API challenges with Workspace Variables, any non-string Workspace Variable value (where the `hcl` attribute would equal `true`) will be JSON-encoded and subsequently any `:` characters will be replaced with `=`. Therefore, _non-string_ Workspace Variable values that contains a colon character are not currently supported.
+- Due to some current provider-interfacing/API challenges with Workspace Variables, any non-string Workspace Variable value (where the `hcl` attribute would equal `true`) will be JSON-encoded and subsequently any `:` characters will be replaced with `=`. Therefore, _non-string_ Workspace Variable values that contain a colon character are not currently supported.
