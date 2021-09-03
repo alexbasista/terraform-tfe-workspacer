@@ -9,17 +9,26 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
+provider "tfe" {
+  hostname = var.tfe_hostname
+}
+
 module "tfe-workspace" {
   source = "../.."
 
-  organization   = "terraform-tom"
-  workspace_name = "terraform-tfe-workspacer-full-test"
-  workspace_desc = "Terraform module CI testing."
+  organization        = "tfeadmin"
+  workspace_name      = "tfe-workspacer-module-full-test"
+  workspace_desc      = "Terraform TFE Workspacer module full CI test."
+  execution_mode      = "remote"
+  auto_apply          = false
+  terraform_version   = "1.0.3"
+  working_directory   = "/"
+  global_remote_state = true
 
   tfvars = {
     teststring = "iamstring"
     testlist   = ["1", "2", "3"]
-    testmap    = { "a" = "1", "b" = "2", "c" = { "nest1key" = "nest1value"} }
+    testmap    = { "a" = "1", "b" = "2", "c" = { "nest1key" = "nest1value" } }
   }
 
   tfvars_sensitive = {
@@ -38,20 +47,19 @@ module "tfe-workspace" {
   }
 
   team_access = {
-    "test-invisible" = "read"
-    "github-actions" = "write"
-    "test"           = "admin"
+    "dev-team"     = "read"
+    "release-team" = "write"
   }
 
   custom_team_access = {
-    "new-team" = {
+    custom-team-1 = {
       runs              = "read"
       variables         = "read"
       state_versions    = "read-outputs"
       sentinel_mocks    = "read"
       workspace_locking = true
     }
-    "custom-team-perms" = {
+    custom-team-2 = {
       runs              = "read"
       variables         = "write"
       state_versions    = "read"
@@ -62,16 +70,16 @@ module "tfe-workspace" {
 
   notifications = [
     {
-      name             = "test-notification-email"
-      destination_type = "email"
-      email_user_ids   = ["abasista"]
+      name             = "test-notification-webhook"
+      destination_type = "generic"
+      url              = "https://example.com"
+      token            = "abcdefg1234567"
       triggers         = ["run:completed", "run:errored"]
       enabled          = true
     }
   ]
 
   run_trigger_source_workspaces = [
-    "my-new-ws",
-    "new-ui-beta"
+    "tfe-workspacer-module-basic-test",
   ]
 }

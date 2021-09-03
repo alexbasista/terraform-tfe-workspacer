@@ -9,24 +9,16 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
+provider "tfe" {
+  hostname = var.tfe_hostname
+}
+
 module "tfe-workspace" {
   source = "../.."
 
-  organization   = "terraform-tom"
-  workspace_name = "terraform-tfe-workspacer-basic-test"
-  workspace_desc = "Terraform module CI testing."
-
-  tfvars = {
-    teststring = "iamstring"
-    testlist   = ["1", "2", "3"]
-    testmap    = { "a" = "1", "b" = "2", "c" = { "nest1key" = "nest1value"} }
-  }
-
-  tfvars_sensitive = {
-    secret      = "secstring"
-    secret_list = ["sec1", "sec2", "sec3"]
-    secret_map  = { "x" = "sec4", "y" = "sec5", "z" = "sec6" }
-  }
+  organization   = "tfeadmin"
+  workspace_name = "tfe-workspacer-module-basic-test"
+  workspace_desc = "Terraform TFE Workspacer module basic CI test."
 
   envvars = {
     AWS_ACCESS_KEY_ID = "THISISNOTAREALACCESSKEY"
@@ -37,8 +29,7 @@ module "tfe-workspace" {
   }
 
   team_access = {
-    "test-invisible" = "read"
-    "github-actions" = "write"
-    "test"           = "admin"
+    "dev-team"     = "read"
+    "release-team" = "write"
   }
 }
