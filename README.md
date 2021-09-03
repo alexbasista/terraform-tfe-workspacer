@@ -44,12 +44,11 @@ The optional `vcs_repo` input variable expects a map of key/value pairs with up 
     identifier         = "<VCS organization>/<VCS repository>"
     branch             = "main"
     oauth_token_id     = "ot-abcdefg123456789"
-    ingress_submodules = false
   }
 ```
 
 ### Workspace Variables
-This modules strives to make defining and creating Workspace Variables as streamlined as possible and closer to the TF OSS `terraform.tfvars` user experience of key/value pairs. There are four different optional input variables available to create Workspace Variables.
+This modules strives to make defining and creating Workspace Variables as streamlined as possible and closer to the Terraform OSS `terraform.tfvars` experience of key/value pairs. There are four different optional input variables available for creating Workspace Variables:
 
 #### Terraform Variables
 `tfvars` accepts a map of key/value pairs of any type, and `tfvars_sensitive` is the same except it will also mark the variable(s) as sensitive upon creation.
@@ -158,5 +157,8 @@ To optionally add Run Triggers, the `run_trigger_source_workspaces` input variab
 <p>&nbsp;</p>
 
 ## Disclaimer
+This module currently uses the experimental feature [Optional Object Type Attributes](https://www.terraform.io/docs/language/expressions/type-constraints.html#experimental-optional-object-type-attributes) for the `notifications` input variable, so seeing a warning in the console output when Terraforms runs is expected and normal. Since this feature is expermimental, it is likely that there will be breaking changes when it is released as an officially supported feature in Terraform core. This module will be updated accordingly with a new version when that happens.
+<p>&nbsp;</p>
 
 ## Limitations
+- Due to some current provider-interfacing/API challenges with Workspace Variables, any non-string Workspace Variable value (where the `hcl` attribute would equal `true`) will be JSON-encoded and subsequently any `:` characters will be replaced with `=`. Therefore, _non-string_ Workspace Variable values that contains a colon character are not currently supported.
