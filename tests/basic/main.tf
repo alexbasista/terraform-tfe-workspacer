@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.25.3"
+      version = "0.31.0"
     }
   }
 
@@ -13,19 +13,19 @@ provider "tfe" {
   hostname = var.tfe_hostname
 }
 
-module "tfe-workspace" {
+module "workspacer" {
   source = "../.."
 
-  organization   = "tfeadmin"
-  workspace_name = "tfe-workspacer-module-basic-test"
-  workspace_desc = "Terraform TFE Workspacer module basic CI test."
+  organization   = var.organization
+  workspace_name = "workspacer-module-basic-test"
+  workspace_desc = "Created by Terraform Workspacer module."
 
   envvars = {
-    AWS_ACCESS_KEY_ID = "THISISNOTAREALACCESSKEY"
+    AWS_ACCESS_KEY_ID = "TH1SISNOTAREAL@CCESSKEY"
   }
 
   envvars_sensitive = {
-    AWS_SECRET_ACCESS_KEY = "THISISNOTAREALSECRETKEY123!@#"
+    AWS_SECRET_ACCESS_KEY = "THISI$NOTAREALSECRETKEY123!@#"
   }
 
   team_access = {

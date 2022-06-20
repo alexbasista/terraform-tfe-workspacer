@@ -1,12 +1,17 @@
+#------------------------------------------------------------------------------
+# Provider
+#------------------------------------------------------------------------------
 variable "tfe_hostname" {
   type        = string
-  description = "Hostname of TFE instance to provision against."
+  description = "Hostname of TFC/TFE to use."
 }
 
+#------------------------------------------------------------------------------
+# Module
+#------------------------------------------------------------------------------
 variable "organization" {
   type        = string
-  description = "Name of TFE Organization to provision Workspace(s) in."
-  default     = "tfeadmin"
+  description = "Name of Organization to create Workspace(s) in."
 }
 
 variable "workspaces" {
@@ -18,19 +23,19 @@ variable "workspaces" {
       }
     )
   )
-  description = "Map of Workspace objects to provision."
+  description = "Map of Workspace objects to create."
   default = {
     ws_1 = {
-      name        = "ws-1"
-      description = "workspace-1"
+      name        = "workspacer-module-foreach-test-1"
+      description = "Workspace 1 created by Terraform Workspacer module."
     }
     ws_2 = {
-      name        = "ws-2"
-      description = "workspace-2"
+      name        = "workspacer-module-foreach-test-2"
+      description = "Workspace 2 created by Terraform Workspacer module."
     }
     ws_3 = {
-      name        = "ws-3"
-      description = "workspace-3"
+      name        = "workspacer-module-foreach-test-3"
+      description = "Workspace 3 created by Terraform Workspacer module."
     }
   }
 }

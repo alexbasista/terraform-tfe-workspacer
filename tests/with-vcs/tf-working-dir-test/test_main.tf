@@ -2,13 +2,13 @@ terraform {
   required_providers {
     null = {
       source = "hashicorp/null"
-      version = "3.1.0"
+      version = "3.1.1"
     }
   }
 }
 
 resource "null_resource" "test" {
   provisioner "local-exec" {
-   command = "echo 'Testing Terraform TFE Workspacer module with VCS.'"
+   command = "echo 'Testing Terraform Workspacer module with VCS.'"
   }
 }
