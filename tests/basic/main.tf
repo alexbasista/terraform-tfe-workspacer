@@ -19,6 +19,7 @@ module "workspacer" {
   organization   = var.organization
   workspace_name = "workspacer-module-basic-test"
   workspace_desc = "Created by Terraform Workspacer module."
+  workspace_tags = ["module-ci", "test", "aws"]
 
   envvars = {
     AWS_ACCESS_KEY_ID = "TH1SISNOTAREAL@CCESSKEY"

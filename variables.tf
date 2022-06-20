@@ -28,6 +28,12 @@ variable "execution_mode" {
   }
 }
 
+variable "agent_pool_id" {
+  type        = string
+  description = "ID of existing Agent Pool to assign to Workspace. Only use if `execution_mode` is set to `agent`."
+  default     = null
+}
+
 variable "auto_apply" {
   type        = bool
   description = "Boolean to automatically run Terraform Apply when a Terraform Plan with changes is successful."
@@ -58,6 +64,12 @@ variable "remote_state_consumer_ids" {
   default     = null
 }
 
+variable "structured_run_output_enabled" {
+  type        = bool
+  description = "Boolean to enable the advanced Run UI. Set to `false` for the traditional console-based Run output."
+  default     = true
+}
+
 variable "ssh_key_id" {
   type        = string
   description = "SSH private key the Workspace will use for downloading Terraform modules from Git-based module sources. Key must exist in Organization first."
@@ -68,6 +80,12 @@ variable "allow_destroy_plan" {
   type        = bool
   description = "Boolean setting to allow destroy plans on Workspace."
   default     = true
+}
+
+variable "workspace_tags" {
+  type        = list(string)
+  description = "List of tag names to apply to Workspace. Tags must only contain letters, numbers, or colons."
+  default     = []
 }
 
 variable "vcs_repo" {
