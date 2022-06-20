@@ -76,6 +76,12 @@ variable "allow_destroy_plan" {
   default     = true
 }
 
+variable "workspace_tags" {
+  type        = list(string)
+  description = "List of tag names to apply to Workspace. Tags must only contain letters, numbers, or colons."
+  default     = []
+}
+
 variable "vcs_repo" {
   type        = map(string)
   description = "Map of settings to connect Workspace to VCS repository."

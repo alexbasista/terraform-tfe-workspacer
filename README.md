@@ -25,6 +25,7 @@ module "workspacer" {
   organization   = "my-tfe-org"
   workspace_name = "my-new-ws"
   workspace_desc = "Description of my new Workspace."
+  workspace_tags = ["tag1", "tag2", "tagz"]
 
   tfvars = {
     teststring = "iamstring"

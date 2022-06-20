@@ -19,6 +19,7 @@ module "workspacer" {
   organization        = var.organization
   workspace_name      = "workspacer-module-full-test"
   workspace_desc      = "Created by Terraform Workspacer module."
+  workspace_tags      = ["dev", "aws"]
   execution_mode      = "remote"
   auto_apply          = false
   terraform_version   = "1.2.3"
