@@ -12,7 +12,7 @@ resource "tfe_workspace" "ws" {
   structured_run_output_enabled = var.structured_run_output_enabled
   ssh_key_id                    = var.ssh_key_id
   allow_destroy_plan            = var.allow_destroy_plan
-  tag_names                     = var.workspace_tags 
+  tag_names                     = var.workspace_tags
 
   dynamic "vcs_repo" {
     for_each = lookup(var.vcs_repo, "identifier", null) == null ? [] : [var.vcs_repo]

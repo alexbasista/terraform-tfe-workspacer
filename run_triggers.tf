@@ -1,6 +1,6 @@
 data "tfe_workspace_ids" "run_triggers" {
   count = var.run_trigger_source_workspaces == [] ? 0 : 1
-  
+
   names        = var.run_trigger_source_workspaces
   organization = var.organization
 }
