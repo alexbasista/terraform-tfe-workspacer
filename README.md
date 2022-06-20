@@ -1,5 +1,5 @@
 # terraform-tfe-workspacer
-Terraform module to create and configure a Workspace in Terraform Cloud/Enterprise.
+Terraform module to create and configure a Workspace(s) in Terraform Cloud/Enterprise.
 
 ## Usage
 ```hcl
@@ -7,7 +7,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.25.3"
+      version = "0.31.0"
     }
   }
 
@@ -18,12 +18,13 @@ provider "tfe" {
   hostname = my-tfe-instance.com
 }
 
-module "tfe-workspace" {
-  source = "github.com/alexbasista/terraform-tfe-workspacer"
+module "workspacer" {
+  source  = "alexbasista/workspacer/tfe"
+  version = "0.2.0"
 
   organization   = "my-tfe-org"
-  workspace_name = "my-new-tfe-ws"
-  workspace_desc = "Description of my new TFE Workspace."
+  workspace_name = "my-new-ws"
+  workspace_desc = "Description of my new Workspace."
 
   tfvars = {
     teststring = "iamstring"
@@ -33,9 +34,8 @@ module "tfe-workspace" {
 }
 ```
 > Note: Setting a `TFE_TOKEN` environment variable is the recommended approach for the TFE provider auth.
-<p>&nbsp;</p>
 
-See the [tests](./tests) directory for more detailed examples, and see the below sections for optional configurations/features.
+See the [tests](./tests) directory for more detailed examples/scenarios, and see the below sections for optional configurations/features.
 
 ### With VCS
 The optional `vcs_repo` input variable expects a map of key/value pairs with up to four attributes (`branch` and `ingress_submodules` are optional).
@@ -48,7 +48,7 @@ The optional `vcs_repo` input variable expects a map of key/value pairs with up 
 ```
 
 ### Workspace Variables
-This modules strives to make defining and creating Workspace Variables as streamlined as possible and closer to the Terraform OSS `terraform.tfvars` experience of key/value pairs. There are four different optional input variables available for creating Workspace Variables:
+This module strives to make creating Workspace Variables as streamlined as possible and closer to the Terraform OSS `terraform.tfvars` experience of specifying input variable values as key/value pairs. There are four different optional input variables available for creating Workspace Variables:
 
 #### Terraform Variables
 `tfvars` accepts a map of key/value pairs of any type, and `tfvars_sensitive` is the same except it will also mark the variable(s) as sensitive upon creation.
@@ -79,10 +79,10 @@ This modules strives to make defining and creating Workspace Variables as stream
 ```
 
 ### Team Access
-To optionally add RBAC to the Workspace, there are two options. 
+To configure RBAC on the Workspace, there are two options:
 
 #### Built-In Permissions
-The `team_access` input variable accepts a map of strings whereby each key/value pair is the existing Team name and built-in permission level.
+The `team_access` input variable accepts a map of strings whereby each key/value pair is the (existing) Team name and built-in permission level.
 
 ```hcl
   team_access = {
@@ -93,7 +93,7 @@ The `team_access` input variable accepts a map of strings whereby each key/value
 ```
 
 #### Custom Permissions
-The `custom_team_access` input variable accepts a map of objects whereby each object represents a set of custom team permission levels. The object key is the existing Team name.  The way the TFE provider and API currently work, all five of the object attributes must be specified together when using.
+The `custom_team_access` input variable accepts a map of objects whereby each object represents a set of custom team permission levels. The object key is the (existing) Team name. The way the TFE provider and API currently work, all five of the object attributes must be specified together when using.
 
 ```hcl
   custom_team_access = {
@@ -115,7 +115,7 @@ The `custom_team_access` input variable accepts a map of objects whereby each ob
 ```
 
 ### Notifications
-To optionally create notifications, the `notifications` input variable accepts a list of objects, whereby each object is a notification configuration.
+To create Notifications, the `notifications` input variable accepts a list of objects, whereby each object is a Notification configuration.
 
 ```hcl
   notifications = [
@@ -146,7 +146,7 @@ To optionally create notifications, the `notifications` input variable accepts a
 ```
 
 ### Run Triggers
-To optionally add Run Triggers, the `run_trigger_source_workspaces` input variable accepts a list of Workspace names.
+To add Run Triggers, the `run_trigger_source_workspaces` input variable accepts a list of (existing) Workspace names.
 
 ```hcl
   run_trigger_source_workspaces = [
@@ -158,6 +158,7 @@ To optionally add Run Triggers, the `run_trigger_source_workspaces` input variab
 
 ## Disclaimer
 This module currently uses the experimental feature [Optional Object Type Attributes](https://www.terraform.io/docs/language/expressions/type-constraints.html#experimental-optional-object-type-attributes) for the `notifications` input variable, so seeing a warning in the console output when Terraforms runs is expected and normal. Since this feature is expermimental, it is likely that there will be breaking changes when it is released as an officially supported feature in Terraform core. This module will be updated accordingly with a new version when that happens.
+> Update: this experiment will be concluded soon with an improved design! The current plan is for this feature to GA with the v1.3.0 release of Terraform.
 <p>&nbsp;</p>
 
 ## Limitations
