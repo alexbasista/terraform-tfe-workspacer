@@ -1,4 +1,6 @@
-### --- Workspace --- ###
+#------------------------------------------------------------------------------
+# Workspace
+#------------------------------------------------------------------------------
 variable "organization" {
   type        = string
   description = "Organization to create Workspace in."
@@ -98,30 +100,9 @@ variable "speculative_enabled" {
   default     = true
 }
 
-### --- Team Access --- ###
-variable "team_access" {
-  type        = map(string)
-  description = "Map of existing Team(s) and built-in permissions to grant on Workspace."
-  default     = {}
-}
-
-variable "custom_team_access" {
-  type = map(
-    object(
-      {
-        runs              = string
-        variables         = string
-        state_versions    = string
-        sentinel_mocks    = string
-        workspace_locking = bool
-      }
-    )
-  )
-  description = "Map of existing Team(s) and custom permissions to grant on Workspace. If used, all keys in the object must be specified."
-  default     = {}
-}
-
-### --- Workspace Variables --- ###
+#------------------------------------------------------------------------------
+# Workspace Variables
+#------------------------------------------------------------------------------
 variable "tfvars" {
   type        = any
   description = "Map of Terraform variables to add to Workspace."
@@ -146,7 +127,34 @@ variable "envvars_sensitive" {
   default     = {}
 }
 
-### --- Notifications --- ###
+#------------------------------------------------------------------------------
+# Team Access
+#------------------------------------------------------------------------------
+variable "team_access" {
+  type        = map(string)
+  description = "Map of existing Team(s) and built-in permissions to grant on Workspace."
+  default     = {}
+}
+
+variable "custom_team_access" {
+  type = map(
+    object(
+      {
+        runs              = string
+        variables         = string
+        state_versions    = string
+        sentinel_mocks    = string
+        workspace_locking = bool
+      }
+    )
+  )
+  description = "Map of existing Team(s) and custom permissions to grant on Workspace. If used, all keys in the object must be specified."
+  default     = {}
+}
+
+#------------------------------------------------------------------------------
+# Notifications
+#------------------------------------------------------------------------------
 variable "notifications" {
   type = list(
     object(
@@ -166,10 +174,11 @@ variable "notifications" {
   default     = []
 }
 
-### --- Run Triggers --- ###
+#------------------------------------------------------------------------------
+# Run Triggers
+#------------------------------------------------------------------------------
 variable "run_trigger_source_workspaces" {
   type        = list(string)
   description = "List of existing Workspace names that will trigger runs in this Workspace."
   default     = []
 }
-

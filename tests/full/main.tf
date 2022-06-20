@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.25.3"
+      version = "0.31.0"
     }
   }
 
@@ -13,15 +13,15 @@ provider "tfe" {
   hostname = var.tfe_hostname
 }
 
-module "tfe-workspace" {
+module "workspacer" {
   source = "../.."
 
-  organization        = "tfeadmin"
-  workspace_name      = "tfe-workspacer-module-full-test"
-  workspace_desc      = "Terraform TFE Workspacer module full CI test."
+  organization        = var.organization
+  workspace_name      = "workspacer-module-full-test"
+  workspace_desc      = "Created by Terraform Workspacer module."
   execution_mode      = "remote"
   auto_apply          = false
-  terraform_version   = "1.0.3"
+  terraform_version   = "1.2.3"
   working_directory   = "/"
   global_remote_state = true
 
@@ -38,12 +38,12 @@ module "tfe-workspace" {
   }
 
   envvars = {
-    AWS_ACCESS_KEY_ID = "THISISNOTAREALACCESSKEY"
+    AWS_ACCESS_KEY_ID = "TH1$ISNOTAREAL@CCESSKEY"
   }
 
   envvars_sensitive = {
-    AWS_SECRET_ACCESS_KEY = "THISISNOTAREALSECRETKEY123!@#"
-    AWS_SESSION_TOKEN     = "THISISNOTAREALSESSIONTOKEN123456789$%^&*"
+    AWS_SECRET_ACCESS_KEY = "THI$ISNOTAREALSECRETKEY123!@#"
+    AWS_SESSION_TOKEN     = "THI$ISNOTAREALSESSIONTOKEN123456789$%^&*"
   }
 
   team_access = {
@@ -79,7 +79,9 @@ module "tfe-workspace" {
     }
   ]
 
+  # Workspaces must already exist
   run_trigger_source_workspaces = [
-    "tfe-workspacer-module-basic-test",
+    "rt-src1",
+    "rt-src2"
   ]
 }

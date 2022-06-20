@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.25.3"
+      version = "0.31.0"
     }
   }
 
@@ -13,7 +13,7 @@ provider "tfe" {
   hostname = var.tfe_hostname
 }
 
-module "tfe-workspace" {
+module "workspacer" {
   source   = "../.."
   for_each = var.workspaces
 
