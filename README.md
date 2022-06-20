@@ -15,7 +15,7 @@ terraform {
 }
 
 provider "tfe" {
-  hostname = my-tfe-instance.com
+  hostname = "my-tfe-instance.com"
 }
 
 module "workspacer" {
