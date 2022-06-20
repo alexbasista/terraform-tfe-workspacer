@@ -20,4 +20,5 @@ module "workspacer" {
   organization   = var.organization
   workspace_name = each.value.name
   workspace_desc = each.value.description
+  workspace_tags = each.value.tags
 }

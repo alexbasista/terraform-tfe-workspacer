@@ -17,6 +17,7 @@ module "workspacer" {
   organization      = var.organization
   workspace_name    = "workspacer-module-with-vcs-test"
   workspace_desc    = "Created by Terraform Workspacer module."
+  workspace_tags    = ["module-ci", "test", "aws"] 
   auto_apply        = true
   working_directory = "/tests/with-vcs/tf-working-dir-test"
 

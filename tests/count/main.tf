@@ -20,4 +20,5 @@ module "workspacer" {
   organization   = var.organization
   workspace_name = "workspacer-module-count-test-${count.index}"
   workspace_desc = "Created by Terraform Workspacer module."
+  workspace_tags = ["module-ci", "test", "aws"]
 }
