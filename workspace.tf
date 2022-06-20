@@ -3,6 +3,7 @@ resource "tfe_workspace" "ws" {
   name                          = var.workspace_name
   description                   = var.workspace_desc
   execution_mode                = var.execution_mode
+  agent_pool_id                 = var.agent_pool_id
   auto_apply                    = var.auto_apply
   terraform_version             = var.terraform_version
   working_directory             = var.working_directory

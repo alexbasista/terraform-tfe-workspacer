@@ -28,6 +28,12 @@ variable "execution_mode" {
   }
 }
 
+variable "agent_pool_id" {
+  type        = string
+  description = "ID of existing Agent Pool to assign to Workspace. Only use if `execution_mode` is set to `agent`."
+  default     = null
+}
+
 variable "auto_apply" {
   type        = bool
   description = "Boolean to automatically run Terraform Apply when a Terraform Plan with changes is successful."
