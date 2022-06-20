@@ -58,6 +58,12 @@ variable "remote_state_consumer_ids" {
   default     = null
 }
 
+variable "structured_run_output_enabled" {
+  type        = bool
+  description = "Boolean to enable the advanced Run UI. Set to `false` for the traditional console-based Run output."
+  default     = true
+}
+
 variable "ssh_key_id" {
   type        = string
   description = "SSH private key the Workspace will use for downloading Terraform modules from Git-based module sources. Key must exist in Organization first."
