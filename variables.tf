@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------
 variable "organization" {
   type        = string
-  description = "Organization to create Workspace in."
+  description = "Name of Organization to create Workspace in."
 }
 
 variable "workspace_name" {
@@ -13,48 +13,48 @@ variable "workspace_name" {
 
 variable "workspace_desc" {
   type        = string
-  description = "Workspace description."
-  default     = "Created by TFE Terraform provider."
+  description = "Description of Workspace."
+  default     = "Created by Terraform Workspacer module."
 }
 
 variable "execution_mode" {
   type        = string
-  description = "Execution mode of Workspace. Valid values are `remote`, `local`, `agent`."
+  description = "Execution mode of Workspace. Valid values are `remote`, `local`, or `agent`."
   default     = "remote"
 
   validation {
     condition     = contains(["remote", "local", "agent"], var.execution_mode)
-    error_message = "Supported values are `remote`, `local`, `agent`."
+    error_message = "Valid values are `remote`, `local`, or `agent`."
   }
 }
 
 variable "auto_apply" {
   type        = bool
-  description = "Boolean to automatically apply changes when a Terraform Plan is successful."
+  description = "Boolean to automatically run Terraform Apply when a Terraform Plan with changes is successful."
   default     = false
 }
 
 variable "terraform_version" {
   type        = string
-  description = "Version of Terraform the Workspace will use."
+  description = "Version of Terraform to use for this Workspace."
   default     = null
 }
 
 variable "working_directory" {
   type        = string
-  description = "The directory that Terraform will execute within."
+  description = "The relative path that Terraform will execute within. Defaults to the root of the repo."
   default     = null
 }
 
 variable "global_remote_state" {
   type        = bool
-  description = "Boolean to allow all Workspaces within the Organization to access the Remote State of this Workspace."
+  description = "Boolean to allow all Workspaces within the Organization to remotely access the State of this Workspace."
   default     = false
 }
 
 variable "remote_state_consumer_ids" {
   type        = list(string)
-  description = "List of existing Workspace IDs allowed to access the Remote State of Workspace."
+  description = "List of existing Workspace IDs allowed to remotely access the State of Workspace."
   default     = null
 }
 
@@ -96,7 +96,7 @@ variable "trigger_prefixes" {
 
 variable "speculative_enabled" {
   type        = bool
-  description = "Boolean to allow Speculative Plans on the Workspace."
+  description = "Boolean to allow Speculative Plans on Workspace."
   default     = true
 }
 
@@ -179,6 +179,6 @@ variable "notifications" {
 #------------------------------------------------------------------------------
 variable "run_trigger_source_workspaces" {
   type        = list(string)
-  description = "List of existing Workspace names that will trigger runs in this Workspace."
+  description = "List of existing Workspace names that will trigger runs on Workspace."
   default     = []
 }
