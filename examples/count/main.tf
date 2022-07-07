@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.31.0"
+      version = "0.32.1"
     }
   }
 
@@ -14,11 +14,11 @@ provider "tfe" {
 }
 
 module "workspacer" {
-  source   = "../.."
-  for_each = var.workspaces
+  source = "../.."
+  count  = 8
 
   organization   = var.organization
-  workspace_name = each.value.name
-  workspace_desc = each.value.description
-  workspace_tags = each.value.tags
+  workspace_name = "workspacer-module-count-test-${count.index}"
+  workspace_desc = "Created by Terraform Workspacer module."
+  workspace_tags = ["module-ci", "test", "aws"]
 }

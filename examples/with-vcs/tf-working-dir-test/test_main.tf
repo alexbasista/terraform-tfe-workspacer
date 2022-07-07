@@ -9,6 +9,6 @@ terraform {
 
 resource "null_resource" "test" {
   provisioner "local-exec" {
-    command = "echo 'Testing Terraform Workspacer module with VCS.'"
+    command = "echo 'Testing Terraform Workspacer module with VCS-driven workflow.'"
   }
 }
