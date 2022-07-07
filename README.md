@@ -7,7 +7,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.31.0"
+      version = "0.32.1"
     }
   }
 
@@ -20,7 +20,7 @@ provider "tfe" {
 
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.2.0"
+  version = "0.3.0"
 
   organization   = "my-tfe-org"
   workspace_name = "my-new-ws"
@@ -36,7 +36,7 @@ module "workspacer" {
 ```
 > Note: Setting a `TFE_TOKEN` environment variable is the recommended approach for the TFE provider auth.
 
-See the [tests](./tests) directory for more detailed examples/scenarios, and see the below sections for optional configurations/features.
+See the [examples](./examples) directory for more detailed examples/scenarios, and see the below sections for optional configurations/features.
 
 ### With VCS
 The optional `vcs_repo` input variable expects a map of key/value pairs with up to four attributes (`branch` and `ingress_submodules` are optional).
