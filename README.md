@@ -158,7 +158,7 @@ To add Run Triggers, the `run_trigger_source_workspaces` input variable accepts 
   ]
 ```
 
-### Workspace Variable Sets
+### Variable Sets
 To add the Workspace into one or more already existing Variable Sets, the input variable `variable_set_names` accepts a list of Variable Set names.
 
 ```hcl
