@@ -201,3 +201,12 @@ variable "run_trigger_source_workspaces" {
   description = "List of existing Workspace names that will trigger runs on Workspace."
   default     = []
 }
+
+#------------------------------------------------------------------------------
+# Workspace Variable Sets
+#------------------------------------------------------------------------------
+variable "variable_set_names" {
+  type        = list(string)
+  description = "List of names of existing Variable Sets to add this Workspace into."
+  default     = []
+}

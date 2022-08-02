@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.32.1"
+      version = "0.35.0"
     }
   }
 
@@ -84,5 +84,11 @@ module "workspacer" {
   run_trigger_source_workspaces = [
     "rt-src1",
     "rt-src2"
+  ]
+
+  # Variable Sets must already exist
+  variable_set_names = [
+    "aws-creds",
+    "tfe-token"
   ]
 }
