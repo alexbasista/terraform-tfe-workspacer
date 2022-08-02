@@ -1,4 +1,4 @@
-# terraform-tfe-workspacer
+# Workspacer
 Terraform module to create and configure a Workspace(s) in Terraform Cloud/Enterprise.
 
 ## Usage
@@ -7,7 +7,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.32.1"
+      version = "0.35.0"
     }
   }
 
@@ -20,7 +20,7 @@ provider "tfe" {
 
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.3.0"
+  version = "0.4.0"
 
   organization   = "my-tfe-org"
   workspace_name = "my-new-ws"
@@ -155,6 +155,16 @@ To add Run Triggers, the `run_trigger_source_workspaces` input variable accepts 
   run_trigger_source_workspaces = [
     "base-networking-ws",
     "base-iam-ws"
+  ]
+```
+
+### Workspace Variable Sets
+To add the Workspace into one or more already existing Variable Sets, the input variable `variable_set_names` accepts a list of Variable Set names.
+
+```hcl
+  variable_set_names = [
+    "my-aws-creds",
+    "tfe-api-token"
   ]
 ```
 <p>&nbsp;</p>
