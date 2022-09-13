@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.35.0"
+      version = "0.36.1"
     }
   }
 }
@@ -17,7 +17,7 @@ module "workspacer" {
   organization      = var.organization
   workspace_name    = "workspacer-module-with-vcs-test"
   workspace_desc    = "Created by Terraform Workspacer module."
-  workspace_tags    = ["module-ci", "test", "aws"] 
+  workspace_tags    = ["module-ci", "test", "aws"]
   auto_apply        = true
   working_directory = "/tests/with-vcs/tf-working-dir-test"
 
