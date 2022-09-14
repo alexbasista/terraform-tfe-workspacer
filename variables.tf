@@ -112,6 +112,12 @@ variable "trigger_prefixes" {
   default     = null
 }
 
+variable "tags_regex" {
+  type        = string
+  description = "A regular expression used to trigger a Workspace run for matching Git tags. This option conflicts with `trigger_patterns` and `trigger_prefixes`. Should only set this value if the former is not being used."
+  default     = null
+}
+
 variable "speculative_enabled" {
   type        = bool
   description = "Boolean to allow Speculative Plans on Workspace."

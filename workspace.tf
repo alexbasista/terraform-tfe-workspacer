@@ -21,6 +21,7 @@ resource "tfe_workspace" "ws" {
       branch             = lookup(var.vcs_repo, "branch", null)
       oauth_token_id     = lookup(var.vcs_repo, "oauth_token_id", null)
       ingress_submodules = lookup(var.vcs_repo, "ingress_submodules", null)
+      tags_regex         = lookup(var.vcs_repo, "tags_regex", null)
     }
   }
 

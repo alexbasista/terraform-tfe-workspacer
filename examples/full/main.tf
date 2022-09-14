@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.35.0"
+      version = "0.36.1"
     }
   }
 
@@ -59,6 +59,7 @@ module "workspacer" {
       state_versions    = "read-outputs"
       sentinel_mocks    = "read"
       workspace_locking = true
+      runs_tasks        = "read"
     }
     custom-team-2 = {
       runs              = "read"
@@ -66,6 +67,7 @@ module "workspacer" {
       state_versions    = "read"
       sentinel_mocks    = "none"
       workspace_locking = false
+      runs_tasks        = "read"
     }
   }
 
