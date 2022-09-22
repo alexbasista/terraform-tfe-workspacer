@@ -10,8 +10,6 @@ terraform {
       version = "0.36.1"
     }
   }
-
-  experiments = [module_variable_optional_attrs]
 }
 
 provider "tfe" {
@@ -20,7 +18,7 @@ provider "tfe" {
 
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.4.0"
+  version = "0.5.0"
 
   organization   = "my-tfe-org"
   workspace_name = "my-new-ws"
@@ -167,11 +165,6 @@ To add the Workspace into one or more already existing Variable Sets, the input 
     "tfe-api-token"
   ]
 ```
-<p>&nbsp;</p>
-
-## Disclaimer
-This module currently uses the experimental feature [Optional Object Type Attributes](https://www.terraform.io/docs/language/expressions/type-constraints.html#experimental-optional-object-type-attributes) for the `notifications` input variable, so seeing a warning in the console output when Terraforms runs is expected and normal. Since this feature is expermimental, it is likely that there will be breaking changes when it is released as an officially supported feature in Terraform core. This module will be updated accordingly with a new version when that happens.
-> Update: this experiment will be concluded soon with an improved design! The current plan is for this feature to GA with the v1.3.0 release of Terraform.
 <p>&nbsp;</p>
 
 ## Limitations
