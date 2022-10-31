@@ -15,19 +15,21 @@ module "workspacer" {
   source = "../.."
 
   organization          = var.organization
-  workspace_name        = "aaaworkspacer-module-with-vcs-test"
+  workspace_name        = "aaamodule-workspacer-with-vcs-test"
   workspace_desc        = "Created by Terraform Workspacer module."
   workspace_tags        = ["module-ci", "test", "vcs-driven"]
+  
+  working_directory     = "/examples/with-vcs/tf-working-dir-test"
   auto_apply            = true
   file_triggers_enabled = true
-  queue_all_runs        = true
   trigger_prefixes      = null
   trigger_patterns      = null
-  working_directory     = "/examples/with-vcs/tf-working-dir-test"
-
+  queue_all_runs        = true
+  
   vcs_repo = {
     identifier     = "alexbasista/terraform-tfe-workspacer"
     branch         = "feature-updates"
     oauth_token_id = var.oauth_token_id
+    tags_regex     = null
   }
 }
