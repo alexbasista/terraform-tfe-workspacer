@@ -15,7 +15,7 @@ module "workspacer" {
   source = "../.."
 
   organization          = var.organization
-  workspace_name        = "aaamodule-workspacer-with-vcs-test"
+  workspace_name        = "module-workspacer-with-vcs-test"
   workspace_desc        = "Created by Terraform Workspacer module."
   workspace_tags        = ["module-ci", "test", "vcs-driven"]
   
@@ -28,7 +28,7 @@ module "workspacer" {
   
   vcs_repo = {
     identifier     = "alexbasista/terraform-tfe-workspacer"
-    branch         = "feature-updates"
+    branch         = "main"
     oauth_token_id = var.oauth_token_id
     tags_regex     = null # conflicts with `trigger_prefixes` and `trigger_patterns`
   }
