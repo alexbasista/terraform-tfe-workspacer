@@ -30,6 +30,6 @@ module "workspacer" {
     identifier     = "alexbasista/terraform-tfe-workspacer"
     branch         = "feature-updates"
     oauth_token_id = var.oauth_token_id
-    tags_regex     = null
+    tags_regex     = null # conflicts with `trigger_prefixes` and `trigger_patterns`
   }
 }
