@@ -7,4 +7,6 @@ terraform {
   }
 }
 
-resource "random_pet" "test" {}
+resource "random_pet" "test_1" {}
+
+resource "random_pet" "test_2" {}
