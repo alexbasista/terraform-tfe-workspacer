@@ -22,8 +22,8 @@ module "workspacer" {
   working_directory     = "/examples/with-vcs/tf-working-dir-test"
   auto_apply            = true
   file_triggers_enabled = true
-  trigger_prefixes      = ["/examples/with-vcs/tf-working-dir-test"]
-  trigger_patterns      = null
+  #trigger_prefixes      = ["/examples/with-vcs/tf-working-dir-test"]
+  trigger_patterns      = ["/examples/with-vcs/tf-working-dir-test/**/*"]
   queue_all_runs        = true
   
   vcs_repo = {
