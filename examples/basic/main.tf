@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.36.1"
+      version = "0.38.0"
     }
   }
 }
@@ -28,7 +28,7 @@ module "workspacer" {
   }
 
   team_access = {
-    "dev-team"     = "read"
-    "release-team" = "write"
+    "dev-team-test"     = "read"
+    "release-team-test" = "write"
   }
 }

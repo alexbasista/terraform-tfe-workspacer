@@ -17,6 +17,24 @@ variable "workspace_desc" {
   default     = "Created by Terraform Workspacer module."
 }
 
+variable "agent_pool_id" {
+  type        = string
+  description = "ID of existing Agent Pool to assign to Workspace. Only use if `execution_mode` is set to `agent`."
+  default     = null
+}
+
+variable "allow_destroy_plan" {
+  type        = bool
+  description = "Boolean setting to allow destroy plans on Workspace."
+  default     = true
+}
+
+variable "auto_apply" {
+  type        = bool
+  description = "Boolean to automatically run Terraform Apply when a Terraform Plan with changes is successful."
+  default     = false
+}
+
 variable "execution_mode" {
   type        = string
   description = "Execution mode of Workspace. Valid values are `remote`, `local`, or `agent`."
@@ -28,28 +46,16 @@ variable "execution_mode" {
   }
 }
 
-variable "agent_pool_id" {
-  type        = string
-  description = "ID of existing Agent Pool to assign to Workspace. Only use if `execution_mode` is set to `agent`."
-  default     = null
-}
-
-variable "auto_apply" {
+variable "assessments_enabled" {
   type        = bool
-  description = "Boolean to automatically run Terraform Apply when a Terraform Plan with changes is successful."
+  description = "Boolean to enable Health Assessments such as Drift Detection on Workspace."
   default     = false
 }
 
-variable "terraform_version" {
-  type        = string
-  description = "Version of Terraform to use for this Workspace."
-  default     = null
-}
-
-variable "working_directory" {
-  type        = string
-  description = "The relative path that Terraform will execute within. Defaults to the root of the repo."
-  default     = null
+variable "file_triggers_enabled" {
+  type        = bool
+  description = "Boolean to filter Runs triggered via webhook (VCS push) based on `working_directory` and `trigger_prefixes`."
+  default     = true
 }
 
 variable "global_remote_state" {
@@ -64,6 +70,18 @@ variable "remote_state_consumer_ids" {
   default     = null
 }
 
+variable "queue_all_runs" {
+  type        = bool
+  description = "Boolean setting for Workspace to automatically queue all Runs after creation."
+  default     = true
+}
+
+variable "speculative_enabled" {
+  type        = bool
+  description = "Boolean to allow Speculative Plans on Workspace."
+  default     = true
+}
+
 variable "structured_run_output_enabled" {
   type        = bool
   description = "Boolean to enable the advanced Run UI. Set to `false` for the traditional console-based Run output."
@@ -76,34 +94,16 @@ variable "ssh_key_id" {
   default     = null
 }
 
-variable "allow_destroy_plan" {
-  type        = bool
-  description = "Boolean setting to allow destroy plans on Workspace."
-  default     = true
-}
-
 variable "workspace_tags" {
   type        = list(string)
   description = "List of tag names to apply to Workspace. Tags must only contain letters, numbers, or colons."
   default     = []
 }
 
-variable "vcs_repo" {
-  type        = map(string)
-  description = "Map of settings to connect Workspace to VCS repository."
-  default     = {}
-}
-
-variable "queue_all_runs" {
-  type        = bool
-  description = "Boolean setting for Workspace to automatically queue all Runs after creation."
-  default     = true
-}
-
-variable "file_triggers_enabled" {
-  type        = bool
-  description = "Boolean to filter Runs triggered via webhook (VCS push) based on `working_directory` and `trigger_prefixes`."
-  default     = true
+variable "terraform_version" {
+  type        = string
+  description = "Version of Terraform to use for this Workspace."
+  default     = null
 }
 
 variable "trigger_prefixes" {
@@ -112,16 +112,28 @@ variable "trigger_prefixes" {
   default     = null
 }
 
-variable "tags_regex" {
-  type        = string
-  description = "A regular expression used to trigger a Workspace run for matching Git tags. This option conflicts with `trigger_patterns` and `trigger_prefixes`. Should only set this value if the former is not being used."
+variable "trigger_patterns" {
+  type        = list(string)
+  description = "List of glob patterns that describe the files monitored for changes to trigger Runs in Workspace. Mutually exclusive with `trigger_prefixes`. Only available with TFC."
   default     = null
 }
 
-variable "speculative_enabled" {
-  type        = bool
-  description = "Boolean to allow Speculative Plans on Workspace."
-  default     = true
+variable "working_directory" {
+  type        = string
+  description = "The relative path that Terraform will execute within. Defaults to the root of the repo."
+  default     = null
+}
+
+variable "vcs_repo" {
+  type        = map(string)
+  description = "Map of settings to connect Workspace to VCS repository."
+  default     = {}
+}
+
+variable "tags_regex" {
+  type        = string
+  description = "A regular expression used to trigger a Run in Workspace for matching Git tags. This option conflicts with `trigger_patterns` and `trigger_prefixes`. Should only set this value if the former is not being used."
+  default     = null
 }
 
 #------------------------------------------------------------------------------
