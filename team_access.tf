@@ -32,6 +32,6 @@ resource "tfe_team_access" "custom" {
     state_versions    = lookup(each.value, "state_versions", "none")
     sentinel_mocks    = lookup(each.value, "sentinel_mocks", "none")
     workspace_locking = lookup(each.value, "workspace_locking", false)
-    run_tasks         = lookup(each.value, "run_tasks", "none")
+    run_tasks         = lookup(each.value, "run_tasks", false)
   }
 }

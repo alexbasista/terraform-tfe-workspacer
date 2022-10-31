@@ -2,7 +2,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.36.1"
+      version = "0.38.0"
     }
   }
 }
@@ -15,14 +15,15 @@ module "workspacer" {
   source = "../.."
 
   organization        = var.organization
-  workspace_name      = "workspacer-module-full-test"
+  workspace_name      = "module-workspacer-full-test"
   workspace_desc      = "Created by Terraform Workspacer module."
   workspace_tags      = ["module-ci", "test", "aws"]
+  auto_apply          = true
   execution_mode      = "remote"
-  auto_apply          = false
-  terraform_version   = "1.2.3"
-  working_directory   = "/"
+  assessments_enabled = true
   global_remote_state = true
+  terraform_version   = "1.3.3"
+  working_directory   = "/"
 
   tfvars = {
     teststring = "iamstring"
@@ -46,26 +47,25 @@ module "workspacer" {
   }
 
   team_access = {
-    "dev-team"     = "read"
-    "release-team" = "write"
+    "ops-team-test" = "admin"
   }
 
   custom_team_access = {
-    custom-team-1 = {
+    dev-team-test = {
       runs              = "read"
       variables         = "read"
       state_versions    = "read-outputs"
       sentinel_mocks    = "read"
-      workspace_locking = true
-      runs_tasks        = "read"
+      workspace_locking = false
+      runs_tasks        = false
     }
-    custom-team-2 = {
+    release-team-test = {
       runs              = "read"
       variables         = "write"
       state_versions    = "read"
       sentinel_mocks    = "none"
-      workspace_locking = false
-      runs_tasks        = "read"
+      workspace_locking = true
+      runs_tasks        = true
     }
   }
 
@@ -82,13 +82,13 @@ module "workspacer" {
 
   # Workspaces must already exist
   run_trigger_source_workspaces = [
-    "rt-src1",
-    "rt-src2"
+    "rt-src1-test",
+    "rt-src2-test"
   ]
 
   # Variable Sets must already exist
   variable_set_names = [
-    "aws-creds",
-    "tfe-token"
+    "aws-creds-test",
+    "tfe-token-test"
   ]
 }

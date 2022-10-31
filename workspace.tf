@@ -2,17 +2,23 @@ resource "tfe_workspace" "ws" {
   organization                  = var.organization
   name                          = var.workspace_name
   description                   = var.workspace_desc
-  execution_mode                = var.execution_mode
   agent_pool_id                 = var.agent_pool_id
+  allow_destroy_plan            = var.allow_destroy_plan
   auto_apply                    = var.auto_apply
-  terraform_version             = var.terraform_version
-  working_directory             = var.working_directory
+  execution_mode                = var.execution_mode
+  assessments_enabled           = var.assessments_enabled
+  file_triggers_enabled         = var.file_triggers_enabled
   global_remote_state           = var.global_remote_state
   remote_state_consumer_ids     = var.remote_state_consumer_ids
+  queue_all_runs                = var.queue_all_runs
+  speculative_enabled           = var.speculative_enabled
   structured_run_output_enabled = var.structured_run_output_enabled
   ssh_key_id                    = var.ssh_key_id
-  allow_destroy_plan            = var.allow_destroy_plan
   tag_names                     = var.workspace_tags
+  terraform_version             = var.terraform_version
+  trigger_prefixes              = var.trigger_prefixes
+  trigger_patterns              = var.trigger_patterns
+  working_directory             = var.working_directory
 
   dynamic "vcs_repo" {
     for_each = lookup(var.vcs_repo, "identifier", null) == null ? [] : [var.vcs_repo]
@@ -24,10 +30,5 @@ resource "tfe_workspace" "ws" {
       tags_regex         = lookup(var.vcs_repo, "tags_regex", null)
     }
   }
-
-  queue_all_runs        = var.queue_all_runs
-  file_triggers_enabled = var.file_triggers_enabled
-  trigger_prefixes      = var.trigger_prefixes
-  speculative_enabled   = var.speculative_enabled
 }
 
