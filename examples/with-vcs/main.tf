@@ -19,7 +19,7 @@ module "workspacer" {
   workspace_desc        = "Created by Terraform Workspacer module."
   workspace_tags        = ["module-ci", "test", "vcs-driven"]
   auto_apply            = true
-  file_triggers_enabled = false
+  file_triggers_enabled = true
   queue_all_runs        = true
   trigger_prefixes      = null
   trigger_patterns      = null
