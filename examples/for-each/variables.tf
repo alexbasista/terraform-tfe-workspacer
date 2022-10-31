@@ -24,20 +24,20 @@ variable "workspaces" {
       }
     )
   )
-  description = "Map of Workspace objects to create."
+  description = "Map of objects for Workspaces to create."
   default = {
     ws_1 = {
-      name        = "workspacer-module-foreach-test-1"
+      name        = "module-workspacer-foreach-test-1"
       description = "Workspace 1 created by Terraform Workspacer module."
       tags        = ["dev", "module-ci", "aws"]
     }
     ws_2 = {
-      name        = "workspacer-module-foreach-test-2"
+      name        = "module-workspacer-foreach-test-2"
       description = "Workspace 2 created by Terraform Workspacer module."
       tags        = ["stage", "module-ci", "aws"]
     }
     ws_3 = {
-      name        = "workspacer-module-foreach-test-3"
+      name        = "module-workspacer-foreach-test-3"
       description = "Workspace 3 created by Terraform Workspacer module."
       tags        = ["prod", "module-ci", "aws"]
     }
