@@ -151,6 +151,12 @@ variable "tfvars_sensitive" {
   default     = {}
 }
 
+variable "tfvars_ignore_changes" {
+  type        = any
+  description = "Map of Terraform variables to add to Workspace whereby changes made outside of Terraform will be ignored."
+  default     = {}
+}
+
 variable "envvars" {
   type        = map(string)
   description = "Map of Environment variables to add to Workspace."
@@ -160,6 +166,12 @@ variable "envvars" {
 variable "envvars_sensitive" {
   type        = map(string)
   description = "Map of sensitive Environment variables to add to Workspace."
+  default     = {}
+}
+
+variable "envvars_ignore_changes" {
+  type        = map(string)
+  description = "Map of sensitive Environment variables to add to Workspace whereby changes made outside of Terraform will be ignored."
   default     = {}
 }
 
