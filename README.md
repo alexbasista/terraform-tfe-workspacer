@@ -102,7 +102,7 @@ The `custom_team_access` input variable accepts a map of objects whereby each ob
       state_versions    = "read"
       sentinel_mocks    = "none"
       workspace_locking = false
-      run_tasks         = "none"
+      run_tasks         = false
     }
     "security-team" = {
       runs              = "plan"
@@ -110,7 +110,7 @@ The `custom_team_access` input variable accepts a map of objects whereby each ob
       state_versions    = "read-outputs"
       sentinel_mocks    = "read"
       workspace_locking = true
-      run_tasks         = "read"
+      run_tasks         = true
     }
   }
 ```
