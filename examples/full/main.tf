@@ -57,7 +57,7 @@ module "workspacer" {
       state_versions    = "read-outputs"
       sentinel_mocks    = "read"
       workspace_locking = false
-      runs_tasks        = false
+      run_tasks         = false
     }
     release-team-test = {
       runs              = "read"
@@ -65,7 +65,7 @@ module "workspacer" {
       state_versions    = "read"
       sentinel_mocks    = "none"
       workspace_locking = true
-      runs_tasks        = true
+      run_tasks         = true
     }
   }
 

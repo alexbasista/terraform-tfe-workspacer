@@ -193,7 +193,7 @@ variable "custom_team_access" {
         state_versions    = string
         sentinel_mocks    = string
         workspace_locking = bool
-        runs_tasks        = string
+        run_tasks         = bool
       }
     )
   )
