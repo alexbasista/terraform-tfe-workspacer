@@ -19,6 +19,7 @@ resource "tfe_workspace" "ws" {
   trigger_prefixes              = var.trigger_prefixes
   trigger_patterns              = var.trigger_patterns
   working_directory             = var.working_directory
+  force_delete                  = var.force_delete
 
   dynamic "vcs_repo" {
     for_each = lookup(var.vcs_repo, "identifier", null) == null ? [] : [var.vcs_repo]
