@@ -18,7 +18,7 @@ provider "tfe" {
 
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.6.1"
+  version = "0.7.0"
 
   organization   = "my-tfe-org"
   workspace_name = "my-new-ws"

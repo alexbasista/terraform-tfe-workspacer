@@ -136,6 +136,12 @@ variable "tags_regex" {
   default     = null
 }
 
+variable "force_delete" {
+  type        = bool
+  description = "Bool that if configured to true will allow deletion of the workspace if there is a state with resources provisioned"
+  default     = null
+}
+
 #------------------------------------------------------------------------------
 # Workspace Variables
 #------------------------------------------------------------------------------
