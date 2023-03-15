@@ -165,7 +165,6 @@ To add the Workspace into one or more already existing Variable Sets, the input 
     "tfe-api-token"
   ]
 ```
-<p>&nbsp;</p>
 
 ### Policy Sets
 To add the Workspace into one or more already existing Policy Sets, the input variable `policy_set_names` accepts a list of Policy Set names.
