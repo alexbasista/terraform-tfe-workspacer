@@ -246,3 +246,12 @@ variable "variable_set_names" {
   description = "List of names of existing Variable Sets to add this Workspace into."
   default     = []
 }
+
+#------------------------------------------------------------------------------
+# Workspace Policy Sets
+#------------------------------------------------------------------------------
+variable "policy_set_names" {
+  type        = list(string)
+  description = "List of names of existing Policy Sets to add this Workspace into."
+  default     = []
+}

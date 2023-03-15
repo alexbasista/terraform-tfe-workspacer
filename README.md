@@ -167,5 +167,16 @@ To add the Workspace into one or more already existing Variable Sets, the input 
 ```
 <p>&nbsp;</p>
 
+### Policy Sets
+To add the Workspace into one or more already existing Policy Sets, the input variable `policy_set_names` accepts a list of Policy Set names.
+
+```hcl
+  policy_set_names = [
+    "sentinel-global",
+    "sentinel-prod"
+  ]
+```
+<p>&nbsp;</p>
+
 ## Limitations
 - Due to some current provider-interfacing/API challenges with Workspace Variables, any non-string Workspace Variable value (where the `hcl` attribute would equal `true`) will be JSON-encoded and subsequently any `:` characters will be replaced with `=`. Therefore, _non-string_ Workspace Variable values that contain a colon character are not currently supported.
