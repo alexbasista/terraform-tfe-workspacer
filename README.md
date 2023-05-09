@@ -7,7 +7,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.38.0"
+      version = "0.44.1"
     }
   }
 }
@@ -18,7 +18,7 @@ provider "tfe" {
 
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.7.0"
+  version = "0.9.0"
 
   organization   = "my-tfe-org"
   workspace_name = "my-new-ws"
@@ -174,6 +174,13 @@ To add the Workspace into one or more already existing Policy Sets, the input va
     "sentinel-global",
     "sentinel-prod"
   ]
+```
+
+### Projects
+To place the Workspace into an existing Project, set the input variable `project_name`.
+
+```hcl
+project_name = "my-project"
 ```
 <p>&nbsp;</p>
 
