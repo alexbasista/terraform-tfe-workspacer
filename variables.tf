@@ -138,7 +138,13 @@ variable "tags_regex" {
 
 variable "force_delete" {
   type        = bool
-  description = "Bool that if configured to true will allow deletion of the workspace if there is a state with resources provisioned"
+  description = "Boolean to allow deletion of the Workspace if there is a Terraform state that contains resources."
+  default     = null
+}
+
+variable "project_name" {
+  type        = string
+  description = "Name of existing Project to place Workspace in."
   default     = null
 }
 
