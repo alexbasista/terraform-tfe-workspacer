@@ -2,10 +2,8 @@ resource "tfe_workspace" "ws" {
   organization                  = var.organization
   name                          = var.workspace_name
   description                   = var.workspace_desc
-  agent_pool_id                 = var.agent_pool_id
   allow_destroy_plan            = var.allow_destroy_plan
   auto_apply                    = var.auto_apply
-  execution_mode                = var.execution_mode
   assessments_enabled           = var.assessments_enabled
   file_triggers_enabled         = var.file_triggers_enabled
   global_remote_state           = var.global_remote_state
@@ -32,5 +30,11 @@ resource "tfe_workspace" "ws" {
       tags_regex         = lookup(var.vcs_repo, "tags_regex", null)
     }
   }
+}
+
+resource "tfe_workspace_settings" "ws" {
+  workspace_id   = tfe_workspace.ws.id
+  execution_mode = var.execution_mode
+  agent_pool_id  = var.execution_mode == "agent" ? var.agent_pool_id : null
 }
 
