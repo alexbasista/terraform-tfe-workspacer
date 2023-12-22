@@ -38,12 +38,7 @@ variable "auto_apply" {
 variable "execution_mode" {
   type        = string
   description = "Execution mode of Workspace. Valid values are `remote`, `local`, or `agent`."
-  default     = "remote"
-
-  validation {
-    condition     = contains(["remote", "local", "agent"], var.execution_mode)
-    error_message = "Valid values are `remote`, `local`, or `agent`."
-  }
+  default     = null
 }
 
 variable "assessments_enabled" {
