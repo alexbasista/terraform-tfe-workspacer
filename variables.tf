@@ -40,7 +40,7 @@ variable "execution_mode" {
   description = "Execution mode of Workspace. Valid values are `remote`, `local`, or `agent`."
   default     = null
   validation {
-    condition     = var.execution_mode == null || can(contains(["remote", "local", "agent"], var.execution_mode))
+    condition     = var.execution_mode != null ? contains(["remote", "local", "agent"], var.execution_mode) : true
     error_message = "If not null, valid values are `remote`, `local`, or `agent`."
   }
 }
