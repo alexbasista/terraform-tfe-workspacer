@@ -38,11 +38,10 @@ variable "auto_apply" {
 variable "execution_mode" {
   type        = string
   description = "Execution mode of Workspace. Valid values are `remote`, `local`, or `agent`."
-  default     = "remote"
-
+  default     = null
   validation {
-    condition     = contains(["remote", "local", "agent"], var.execution_mode)
-    error_message = "Valid values are `remote`, `local`, or `agent`."
+    condition     = var.execution_mode != null ? contains(["remote", "local", "agent"], var.execution_mode) : true
+    error_message = "If not null, valid values are `remote`, `local`, or `agent`."
   }
 }
 
