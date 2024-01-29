@@ -1,3 +1,8 @@
+data "tfe_github_app_installation" "github" {
+  count = lookup(var.vcs_repo, "github_app_installation_id", null) != null ? 1 : 0
+  name  = lookup(var.vcs_repo, "github_app_installation_id", null)
+}
+
 resource "tfe_workspace" "ws" {
   organization                  = var.organization
   name                          = var.workspace_name
@@ -23,11 +28,12 @@ resource "tfe_workspace" "ws" {
   dynamic "vcs_repo" {
     for_each = lookup(var.vcs_repo, "identifier", null) == null ? [] : [var.vcs_repo]
     content {
-      identifier         = lookup(var.vcs_repo, "identifier", null)
-      branch             = lookup(var.vcs_repo, "branch", null)
-      oauth_token_id     = lookup(var.vcs_repo, "oauth_token_id", null)
-      ingress_submodules = lookup(var.vcs_repo, "ingress_submodules", null)
-      tags_regex         = lookup(var.vcs_repo, "tags_regex", null)
+      identifier                 = lookup(var.vcs_repo, "identifier", null)
+      branch                     = lookup(var.vcs_repo, "branch", null)
+      oauth_token_id             = lookup(var.vcs_repo, "oauth_token_id", null) != null ? lookup(var.vcs_repo, "oauth_token_id", null) : null
+      ingress_submodules         = lookup(var.vcs_repo, "ingress_submodules", null)
+      tags_regex                 = lookup(var.vcs_repo, "tags_regex", null)
+      github_app_installation_id = lookup(var.vcs_repo, "github_app_installation_id", null) != null ? data.tfe_github_app_installation.github[0].id : null
     }
   }
 }
