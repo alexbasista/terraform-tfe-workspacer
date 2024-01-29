@@ -31,9 +31,9 @@ resource "tfe_workspace" "ws" {
       identifier                 = lookup(var.vcs_repo, "identifier", null)
       branch                     = lookup(var.vcs_repo, "branch", null)
       oauth_token_id             = lookup(var.vcs_repo, "oauth_token_id", null) != null ? lookup(var.vcs_repo, "oauth_token_id", null) : null
+      github_app_installation_id = lookup(var.vcs_repo, "github_app_installation_id", null) != null ? data.tfe_github_app_installation.github[0].id : null
       ingress_submodules         = lookup(var.vcs_repo, "ingress_submodules", null)
       tags_regex                 = lookup(var.vcs_repo, "tags_regex", null)
-      github_app_installation_id = lookup(var.vcs_repo, "github_app_installation_id", null) != null ? data.tfe_github_app_installation.github[0].id : null
     }
   }
 }
