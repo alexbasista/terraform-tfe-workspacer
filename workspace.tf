@@ -1,6 +1,6 @@
 data "tfe_github_app_installation" "github" {
-  count = lookup(var.vcs_repo, "github_app_installation_id", null) != null ? 1 : 0
-  name  = lookup(var.vcs_repo, "github_app_installation_id", null)
+  count           = lookup(var.vcs_repo, "github_app_installation_id", null) != null ? 1 : 0
+  installation_id = lookup(var.vcs_repo, "github_app_installation_id", null)
 }
 
 resource "tfe_workspace" "ws" {
