@@ -127,6 +127,11 @@ variable "vcs_repo" {
   type        = map(string)
   description = "Map of settings to connect Workspace to VCS repository."
   default     = {}
+
+  validation {
+    condition     = var.vcs_repo != null ? contains(keys(var.vcs_repo), "oauth_token_id") && contains(keys(var.vcs_repo), "github_app_installation_id") ? false : true : true
+    error_message = "If not null, vcs_repo can only contain either 'oauth_token_id' or 'github_app_installation_id'."
+  }
 }
 
 variable "tags_regex" {
