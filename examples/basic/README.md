@@ -1,7 +1,6 @@
-provider "tfe" {
-  hostname = "app.terraform.io"
-}
+# Example - Basic Usage
 
+```hcl
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
   version = "0.11.0"
@@ -33,3 +32,4 @@ module "workspacer" {
     example-team-2 = "write"
   }
 }
+```

@@ -1,12 +1,11 @@
 provider "tfe" {
-  hostname = "app.terraform.io"
+  hostname = var.tfe_hostname
 }
 
 module "workspacer" {
-  source  = "alexbasista/workspacer/tfe"
-  version = "0.11.0"
+  source  = "../.."
 
-  organization   = "<my-org-name>"
+  organization   = var.organization
   workspace_name = "workspacer-basic-example"
   workspace_desc = "Created by 'workspacer' Terraform module."
   workspace_tags = ["app:acme", "env:test", "cloud:aws"]

@@ -8,19 +8,24 @@ variable "organization" {
 
 variable "workspace_name" {
   type        = string
-  description = "Name of Workspace."
+  description = "Name of Workspace to create."
 }
 
 variable "workspace_desc" {
   type        = string
   description = "Description of Workspace."
-  default     = "Created by Terraform Workspacer module."
+  default     = "Created by 'workspacer' Terraform module."
 }
 
 variable "agent_pool_id" {
   type        = string
-  description = "ID of existing Agent Pool to assign to Workspace. Only use if `execution_mode` is set to `agent`."
+  description = "ID of existing Agent Pool to assign to Workspace. Only valid when `execution_mode` is set to `agent`."
   default     = null
+
+  validation {
+    condition     = var.execution_mode == "agent" ? var.agent_pool_id != null : true
+    error_message = "Value must be set if `execution_mode` is set to `agent`."
+  }
 }
 
 variable "allow_destroy_plan" {
@@ -31,7 +36,7 @@ variable "allow_destroy_plan" {
 
 variable "auto_apply" {
   type        = bool
-  description = "Boolean to automatically run Terraform Apply when a Terraform Plan with changes is successful."
+  description = "Boolean to automatically run a Terraform apply after a successful Terraform plan."
   default     = false
 }
 
@@ -39,9 +44,10 @@ variable "execution_mode" {
   type        = string
   description = "Execution mode of Workspace. Valid values are `remote`, `local`, or `agent`."
   default     = null
+
   validation {
     condition     = var.execution_mode != null ? contains(["remote", "local", "agent"], var.execution_mode) : true
-    error_message = "If not null, valid values are `remote`, `local`, or `agent`."
+    error_message = "If not `null`, valid values are `remote`, `local`, or `agent`."
   }
 }
 
@@ -124,13 +130,31 @@ variable "working_directory" {
 }
 
 variable "vcs_repo" {
-  type        = map(string)
-  description = "Map of settings to connect Workspace to VCS repository."
-  default     = {}
+  type = object({
+    identifier                 = string
+    branch                     = optional(string, null)
+    oauth_token_id             = optional(string, null)
+    github_app_installation_id = optional(string, null)
+    ingress_submodules         = optional(bool, false)
+    tags_regex                 = optional(string, null)
+  })
+
+  description = "Object containing settings to connect Workspace to a VCS repository."
+  default     = null
 
   validation {
-    condition     = var.vcs_repo != null ? contains(keys(var.vcs_repo), "oauth_token_id") && contains(keys(var.vcs_repo), "github_app_installation_id") ? false : true : true
-    error_message = "If not null, vcs_repo can only contain either 'oauth_token_id' or 'github_app_installation_id'."
+    condition     = var.vcs_repo != null && var.trigger_prefixes != null ? var.vcs_repo.tags_regex == null : true
+    error_message = "vcs_repo.tags_regex must be `null` when `trigger_prefixes` is set."
+  }
+
+  validation {
+    condition     = var.vcs_repo != null && var.trigger_patterns != null ? var.vcs_repo.tags_regex == null : true
+    error_message = "vcs_repo.tags_regex must be `null` when `trigger_patterns` is set."
+  }
+
+  validation {
+    condition     = var.vcs_repo != null && var.file_triggers_enabled ? var.vcs_repo.tags_regex == null : true
+    error_message = "`vcs_repo.tags_regex` cannot be set `file_triggers_enabled` is `true`."
   }
 }
 
@@ -148,7 +172,7 @@ variable "force_delete" {
 
 variable "project_name" {
   type        = string
-  description = "Name of existing Project to place Workspace in."
+  description = "Name of existing Project to create Workspace in."
   default     = null
 }
 

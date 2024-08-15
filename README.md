@@ -1,26 +1,15 @@
 # Workspacer
-Terraform module to create and configure a Workspace(s) in Terraform Cloud/Enterprise.
+
+Terraform module to create, configure, and manage a Workspace(s) in HCP Terraform or Terraform Enterprise.
 
 ## Usage
+
 ```hcl
-terraform {
-  required_providers {
-    tfe = {
-      source  = "hashicorp/tfe"
-      version = "0.44.1"
-    }
-  }
-}
-
-provider "tfe" {
-  hostname = "my-tfe-instance.com"
-}
-
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.9.0"
+  version = "0.11.0"
 
-  organization   = "my-tfe-org"
+  organization   = "my-hcptf-or-tfe-org-name"
   workspace_name = "my-new-ws"
   workspace_desc = "Description of my new Workspace."
   workspace_tags = ["tag1", "tag2", "tagz"]
@@ -32,12 +21,24 @@ module "workspacer" {
   }
 }
 ```
-> Note: Setting a `TFE_TOKEN` environment variable is the recommended approach for the TFE provider auth.
+>📝 Note: Setting a `TFE_TOKEN` environment variable is the recommended approach for the TFE provider auth.
 
-See the [examples](./examples) directory for more detailed examples/scenarios, and see the below sections for optional configurations/features.
+See the [examples](./examples) directory for more detailed example scenarios, and see the below sections for optional configurations/features.
+
+## Configuration Options
+
+### Projects
+
+To place the Workspace into an existing Project, set the input variable `project_name`.
+
+```hcl
+project_name = "my-project"
+```
 
 ### With VCS
+
 The optional `vcs_repo` input variable expects a map of key/value pairs with up to four attributes (`branch` and `ingress_submodules` are optional).
+
 ```hcl
   vcs_repo = {
     identifier         = "<VCS organization>/<VCS repository>"
@@ -47,9 +48,11 @@ The optional `vcs_repo` input variable expects a map of key/value pairs with up 
 ```
 
 ### Workspace Variables
+
 This module strives to make creating Workspace Variables as streamlined as possible and closer to the Terraform OSS `terraform.tfvars` experience of specifying input variable values as key/value pairs. There are four different optional input variables available for creating Workspace Variables:
 
 #### Terraform Variables
+
 `tfvars` accepts a map of key/value pairs of any type, and `tfvars_sensitive` is the same except it will also mark the variable(s) as sensitive upon creation.
 ```hcl
   tfvars = {
@@ -66,6 +69,7 @@ This module strives to make creating Workspace Variables as streamlined as possi
 ```
 
 #### Environment Variables
+
 `envvars` accepts a map of strings, and `envvars_sensitive` is the same except it will also mark the variable(s) as sensitive upon creation.
 ```hcl
   envvars = {
@@ -78,9 +82,11 @@ This module strives to make creating Workspace Variables as streamlined as possi
 ```
 
 ### Team Access
+
 To configure RBAC on the Workspace, there are two options:
 
 #### Built-In Permissions
+
 The `team_access` input variable accepts a map of strings whereby each key/value pair is the (existing) Team name and built-in permission level.
 
 ```hcl
@@ -92,11 +98,12 @@ The `team_access` input variable accepts a map of strings whereby each key/value
 ```
 
 #### Custom Permissions
+
 The `custom_team_access` input variable accepts a map of objects whereby each object represents a set of custom team permission levels. The object key is the (existing) Team name. The way the TFE provider and API currently work, all five of the object attributes must be specified together when using.
 
 ```hcl
   custom_team_access = {
-    "app-team" = {
+    "example-team-1" = {
       runs              = "read"
       variables         = "read"
       state_versions    = "read"
@@ -104,7 +111,7 @@ The `custom_team_access` input variable accepts a map of objects whereby each ob
       workspace_locking = false
       run_tasks         = false
     }
-    "security-team" = {
+    "example-team-2" = {
       runs              = "plan"
       variables         = "write"
       state_versions    = "read-outputs"
@@ -116,6 +123,7 @@ The `custom_team_access` input variable accepts a map of objects whereby each ob
 ```
 
 ### Notifications
+
 To create Notifications, the `notifications` input variable accepts a list of objects, whereby each object is a Notification configuration.
 
 ```hcl
@@ -147,6 +155,7 @@ To create Notifications, the `notifications` input variable accepts a list of ob
 ```
 
 ### Run Triggers
+
 To add Run Triggers, the `run_trigger_source_workspaces` input variable accepts a list of (existing) Workspace names.
 
 ```hcl
@@ -157,6 +166,7 @@ To add Run Triggers, the `run_trigger_source_workspaces` input variable accepts 
 ```
 
 ### Variable Sets
+
 To add the Workspace into one or more already existing Variable Sets, the input variable `variable_set_names` accepts a list of Variable Set names.
 
 ```hcl
@@ -167,6 +177,7 @@ To add the Workspace into one or more already existing Variable Sets, the input 
 ```
 
 ### Policy Sets
+
 To add the Workspace into one or more already existing Policy Sets, the input variable `policy_set_names` accepts a list of Policy Set names.
 
 ```hcl
@@ -176,13 +187,7 @@ To add the Workspace into one or more already existing Policy Sets, the input va
   ]
 ```
 
-### Projects
-To place the Workspace into an existing Project, set the input variable `project_name`.
-
-```hcl
-project_name = "my-project"
-```
-<p>&nbsp;</p>
+---
 
 ## Limitations
 - Due to some current provider-interfacing/API challenges with Workspace Variables, any non-string Workspace Variable value (where the `hcl` attribute would equal `true`) will be JSON-encoded and subsequently any `:` characters will be replaced with `=`. Therefore, _non-string_ Workspace Variable values that contain a colon character are not currently supported.

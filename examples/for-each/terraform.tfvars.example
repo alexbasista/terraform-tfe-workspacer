@@ -1,0 +1,33 @@
+tfe_hostname = "app.terraform.io"
+
+organization = "my-org-name"
+
+workspaces = {
+  workspace_1 = {
+    name         = "workspacer-foreach-ex-1"
+    description  = "Workspace 1 created by workspacer Terraform module."
+    tags         = ["env:dev", "app:acme", "cloud:aws"]
+    project_name = "Default Project"
+    vcs_repo = {
+      identifier     = "<vcs-organization>/<terraform-repo-name>"
+      branch         = "<main>"
+      oauth_token_id = "<ot-abcdefg123456789>"
+    }
+  }
+  workspace_2 = {
+    name         = "workspacer-foreach-ex-2"
+    description  = "Workspace 2 created by workspacer Terraform module."
+    tags         = ["env:stage", "app:acme", "cloud:aws"]
+    project_name = "Default Project"
+    vcs_repo = {
+      identifier                 = "<vcs-organization>/<terraform-repo-name>"
+      github_app_installation_id = "<ghain-abcdefg123456789>"
+    }
+  }
+  workspace_3 = {
+    name         = "workspacer-foreach-ex-3"
+    description  = "Workspace 3 created by workspacer Terraform module."
+    tags         = ["env:prod", "app:acme", "cloud:aws"]
+    project_name = "Default Project"
+  }
+}

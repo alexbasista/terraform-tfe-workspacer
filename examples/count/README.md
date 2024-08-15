@@ -1,7 +1,6 @@
-provider "tfe" {
-  hostname = "app.terraform.io"
-}
+# Example - Using the `count` Meta-Argument
 
+```hcl
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
   version = "0.11.0"
@@ -12,3 +11,4 @@ module "workspacer" {
   workspace_tags = ["app:acme", "env:test", "cloud:aws"]
   project_name   = "Default Project"
 }
+```
