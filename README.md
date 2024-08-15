@@ -22,7 +22,7 @@ module "workspacer" {
   }
 }
 ```
->📝 Note: Setting a `TFE_TOKEN` environment variable is the recommended approach for the TFE provider auth.
+>📝 Note: Setting a `TFE_TOKEN` environment variable is the recommended approach for the TFE provider authentication.
 
 See the [examples](./examples) directory for more detailed example scenarios, and see the following section for optional configurations/features.
 
@@ -63,7 +63,7 @@ The optional `vcs_repo` input variable expects a map of key/value pairs with up 
 
 ### Workspace Variables
 
-This module strives to make creating Workspace Variables as streamlined as possible and closer to the Terraform OSS `terraform.tfvars` experience of specifying input variable values as key/value pairs. There are four different optional input variables available for creating Workspace Variables:
+This module strives to make creating Workspace Variables more streamlined, and closer to the look and feel of using a `terraform.tfvars` file (key/value pairs) when creating them. There are four different optional input variables available for creating Workspace Variables:
 
 #### Terraform Variables
 
