@@ -3,7 +3,8 @@
 #------------------------------------------------------------------------------
 variable "tfe_hostname" {
   type        = string
-  description = "Hostname of TFC/TFE to use."
+  description = "Hostname of self-hosted TFE instance. Leave as default when using HCP Terraform."
+  default     = "app.terraform.io"
 }
 
 #------------------------------------------------------------------------------
@@ -11,35 +12,32 @@ variable "tfe_hostname" {
 #------------------------------------------------------------------------------
 variable "organization" {
   type        = string
-  description = "Name of Organization to create Workspace(s) in."
+  description = "Name of Organization to create Workspaces in."
 }
 
 variable "workspaces" {
   type = map(
     object(
       {
-        name        = string
-        description = string
-        tags        = list(string)
+        name         = string
+        description  = optional(string, null)
+        tags         = optional(list(string), null)
+        project_name = optional(string, null)
+        vcs_repo = optional(
+          object(
+            {
+              identifier                 = string
+              branch                     = optional(string, null)
+              oauth_token_id             = optional(string, null)
+              github_app_installation_id = optional(string, null)
+              ingress_submodules         = optional(bool, false)
+              tags_regex                 = optional(string, null)
+            }
+          )
+        )
       }
     )
   )
+
   description = "Map of objects for Workspaces to create."
-  default = {
-    ws_1 = {
-      name        = "module-workspacer-foreach-test-1"
-      description = "Workspace 1 created by Terraform Workspacer module."
-      tags        = ["dev", "module-ci", "aws"]
-    }
-    ws_2 = {
-      name        = "module-workspacer-foreach-test-2"
-      description = "Workspace 2 created by Terraform Workspacer module."
-      tags        = ["stage", "module-ci", "aws"]
-    }
-    ws_3 = {
-      name        = "module-workspacer-foreach-test-3"
-      description = "Workspace 3 created by Terraform Workspacer module."
-      tags        = ["prod", "module-ci", "aws"]
-    }
-  }
 }

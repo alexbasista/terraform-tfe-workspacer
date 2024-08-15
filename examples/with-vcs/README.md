@@ -1,7 +1,8 @@
-provider "tfe" {
-  hostname = "app.terraform.io"
-}
+# Example - With VCS Providers
 
+## Normal VCS Provider (OAuth)
+
+```hcl
 module "workspacer_vcs_oauth_token" {
   source  = "alexbasista/workspacer/tfe"
   version = "0.11.0"
@@ -25,6 +26,9 @@ module "workspacer_vcs_oauth_token" {
     tags_regex         = null
   }
 }
+```
+
+## GitHub App
 
 module "workspacer_vcs_github_app" {
   source  = "alexbasista/workspacer/tfe"
@@ -35,7 +39,7 @@ module "workspacer_vcs_github_app" {
   workspace_tags = ["env:test", "app:acme"]
   project_name   = "Default Project"
 
-  working_directory     = "/example/tf/directory"
+  working_directory     = "</example/tf/directory>"
   auto_apply            = false
   file_triggers_enabled = true
   trigger_patterns      = ["</example/tf/directory/**/*>"]
@@ -49,3 +53,4 @@ module "workspacer_vcs_github_app" {
     tags_regex                 = null
   }
 }
+```
