@@ -200,6 +200,17 @@ To add the Workspace into one or more already existing Policy Sets, the input va
   ]
 ```
 
+### SSH KEY ID
+`ssh_key_id` parameter expects id of ssh key. Not name in terraform cloud console. But Terraform cloud console display only the ssh key name. This key is used to  download modules from private terraform repo.
+The following command can be used to get ssh key id.
+
+```
+$ curl  --header "Authorization: Bearer $TFE_TOKEN \
+               https://app.terraform.io/api/v2/organizations/myorg/ssh-keys 
+
+{"data":[{"id":"sshkey-RNURiuEyLRwwt2a2","type":"ssh-keys","attributes":{"name":"my-github-ssh-key"},"links":{"self":"/api/v2/ssh-keys/sshkey-RNURiuEyLRwwt2a2"}}]}⏎  
+```
+
 ---
 
 ## Caveats/Limitations
