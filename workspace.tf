@@ -4,6 +4,7 @@ resource "tfe_workspace" "ws" {
   description                   = var.workspace_desc
   allow_destroy_plan            = var.allow_destroy_plan
   auto_apply                    = var.auto_apply
+  auto_apply_run_trigger =  var.run_trigger_auto_apply
   assessments_enabled           = var.assessments_enabled
   file_triggers_enabled         = var.file_triggers_enabled
   global_remote_state           = var.global_remote_state
