@@ -3,7 +3,7 @@
 ```hcl
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  
+  version = "x.x.x"
   count   = 8
 
   organization   = "<my-org-name>"

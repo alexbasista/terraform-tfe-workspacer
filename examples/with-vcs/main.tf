@@ -4,7 +4,7 @@ provider "tfe" {
 
 module "workspacer_vcs_oauth_token" {
   source  = "alexbasista/workspacer/tfe"
-  
+  version = "0.12.0"
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-vcs-oauth-ex"
@@ -28,7 +28,7 @@ module "workspacer_vcs_oauth_token" {
 
 module "workspacer_vcs_github_app" {
   source  = "alexbasista/workspacer/tfe"
-  
+  version = "0.12.0"
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-vcs-github-app-ex"
