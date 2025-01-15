@@ -4,7 +4,7 @@ provider "tfe" {
 
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.11.0"
+  
   count   = 8
 
   organization   = "<my-org-name>"

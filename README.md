@@ -7,7 +7,7 @@ Terraform module to create, configure, and manage Workspaces in HCP Terraform or
 ```hcl
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.11.0"
+  
 
   organization   = "my-hcptf-or-tfe-org-name"
   workspace_name = "my-new-ws"
@@ -173,8 +173,8 @@ To add Run Triggers, the `run_trigger_source_workspaces` input variable accepts 
 
 ```hcl
   run_trigger_source_workspaces = [
-    "base-networking-ws",
-    "base-iam-ws"
+    "example-src-workspace-1",
+    "example-src-workspace-2"
   ]
 ```
 
@@ -184,8 +184,8 @@ To add the Workspace into one or more already existing Variable Sets, the input 
 
 ```hcl
   variable_set_names = [
-    "my-aws-creds",
-    "tfe-api-token"
+    "example-varset-1",
+    "example-varset-2"
   ]
 ```
 
@@ -200,15 +200,15 @@ To add the Workspace into one or more already existing Policy Sets, the input va
   ]
 ```
 
-### SSH KEY ID
-`ssh_key_id` parameter expects id of ssh key. Not name in terraform cloud console. But Terraform cloud console display only the ssh key name. This key is used to  download modules from private terraform repo.
-The following command can be used to get ssh key id.
+### SSH Key ID
 
-```
+To configure an SSH key on your Workspace, set the SSH key ID via the input `ssh_key_id`. This value should NOT be the name of the SSH key as it appears in the HCP Terraform or TFE UI. If you do not have the ID of your SSH key, you can extract it using the command below. **Note:** This key is only used when a workspace needs to access a private git repository to pull in a module from a git-based module URL or git submodule.
+
+```sh
 $ curl  --header "Authorization: Bearer $TFE_TOKEN \
                https://app.terraform.io/api/v2/organizations/myorg/ssh-keys 
 
-{"data":[{"id":"sshkey-RNURiuEyLRwwt2a2","type":"ssh-keys","attributes":{"name":"my-github-ssh-key"},"links":{"self":"/api/v2/ssh-keys/sshkey-RNURiuEyLRwwt2a2"}}]}⏎  
+{"data":[{"id":"sshkey-abcdefgh12345678","type":"ssh-keys","attributes":{"name":"my-github-ssh-key"},"links":{"self":"/api/v2/ssh-keys/sshkey-abcdefgh12345678"}}]}⏎  
 ```
 
 ---
