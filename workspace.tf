@@ -6,8 +6,6 @@ resource "tfe_workspace" "ws" {
   auto_apply                    = var.auto_apply
   assessments_enabled           = var.assessments_enabled
   file_triggers_enabled         = var.file_triggers_enabled
-  global_remote_state           = var.global_remote_state
-  remote_state_consumer_ids     = var.remote_state_consumer_ids
   queue_all_runs                = var.queue_all_runs
   speculative_enabled           = var.speculative_enabled
   structured_run_output_enabled = var.structured_run_output_enabled
@@ -35,8 +33,12 @@ resource "tfe_workspace" "ws" {
 }
 
 resource "tfe_workspace_settings" "ws" {
-  workspace_id   = tfe_workspace.ws.id
-  execution_mode = var.execution_mode
-  agent_pool_id  = var.execution_mode == "agent" ? var.agent_pool_id : null
+  workspace_id              = tfe_workspace.ws.id
+  execution_mode            = var.execution_mode
+  global_remote_state       = var.global_remote_state
+  remote_state_consumer_ids = var.remote_state_consumer_ids
+
+
+  agent_pool_id = var.execution_mode == "agent" ? var.agent_pool_id : null
 }
 
