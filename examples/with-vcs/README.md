@@ -29,7 +29,7 @@ module "workspacer_vcs_oauth_token" {
 ```
 
 ## GitHub App
-```
+```hcl
 module "workspacer_vcs_github_app" {
   source  = "alexbasista/workspacer/tfe"
   version = "0.11.0"
