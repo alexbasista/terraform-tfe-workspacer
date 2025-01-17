@@ -3,7 +3,7 @@
 ```hcl
 module "workspacer" {
   source   = "alexbasista/workspacer/tfe"
-  version  = "0.11.0"
+  version  = "x.x.x"
   for_each = var.workspaces
 
   organization   = var.organization

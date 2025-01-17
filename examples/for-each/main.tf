@@ -4,7 +4,7 @@ provider "tfe" {
 
 module "workspacer" {
   source   = "alexbasista/workspacer/tfe"
-  version  = "0.11.0"
+  version  = "0.12.0"
   for_each = var.workspaces
 
   organization   = var.organization

@@ -5,7 +5,7 @@
 ```hcl
 module "workspacer_vcs_oauth_token" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.11.0"
+  version = "x.x.x"
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-vcs-oauth-ex"
@@ -29,10 +29,10 @@ module "workspacer_vcs_oauth_token" {
 ```
 
 ## GitHub App
-```
+```hcl
 module "workspacer_vcs_github_app" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.11.0"
+  version = "x.x.x"
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-vcs-github-app-ex"

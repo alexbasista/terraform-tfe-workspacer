@@ -7,7 +7,7 @@ Terraform module to create, configure, and manage Workspaces in HCP Terraform or
 ```hcl
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.11.0"
+  
 
   organization   = "my-hcptf-or-tfe-org-name"
   workspace_name = "my-new-ws"
@@ -173,8 +173,8 @@ To add Run Triggers, the `run_trigger_source_workspaces` input variable accepts 
 
 ```hcl
   run_trigger_source_workspaces = [
-    "base-networking-ws",
-    "base-iam-ws"
+    "example-src-workspace-1",
+    "example-src-workspace-2"
   ]
 ```
 
@@ -184,8 +184,8 @@ To add the Workspace into one or more already existing Variable Sets, the input 
 
 ```hcl
   variable_set_names = [
-    "my-aws-creds",
-    "tfe-api-token"
+    "example-varset-1",
+    "example-varset-2"
   ]
 ```
 
@@ -200,15 +200,15 @@ To add the Workspace into one or more already existing Policy Sets, the input va
   ]
 ```
 
-### SSH KEY ID
-`ssh_key_id` parameter expects id of ssh key. Not name in terraform cloud console. But Terraform cloud console display only the ssh key name. This key is used to  download modules from private terraform repo.
-The following command can be used to get ssh key id.
+### SSH Key ID
 
-```
+To configure an SSH key on your Workspace, set the SSH key ID via the input `ssh_key_id`. This value should NOT be the name of the SSH key as it appears in the HCP Terraform or TFE UI. If you do not have the ID of your SSH key, you can extract it using the command below. **Note:** This key is only used when a workspace needs to access a private git repository to pull in a module from a git-based module URL or git submodule.
+
+```sh
 $ curl  --header "Authorization: Bearer $TFE_TOKEN \
                https://app.terraform.io/api/v2/organizations/myorg/ssh-keys 
 
-{"data":[{"id":"sshkey-RNURiuEyLRwwt2a2","type":"ssh-keys","attributes":{"name":"my-github-ssh-key"},"links":{"self":"/api/v2/ssh-keys/sshkey-RNURiuEyLRwwt2a2"}}]}⏎  
+{"data":[{"id":"sshkey-abcdefgh12345678","type":"ssh-keys","attributes":{"name":"my-github-ssh-key"},"links":{"self":"/api/v2/ssh-keys/sshkey-abcdefgh12345678"}}]}⏎  
 ```
 
 ---
@@ -224,13 +224,13 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
-| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | ~> 0.58 |
+| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | ~> 0.62 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | ~> 0.58 |
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | ~> 0.62 |
 
 ## Resources
 
@@ -267,7 +267,7 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 | <a name="input_allow_destroy_plan"></a> [allow\_destroy\_plan](#input\_allow\_destroy\_plan) | Boolean setting to allow destroy plans on Workspace. | `bool` | `true` | no |
 | <a name="input_assessments_enabled"></a> [assessments\_enabled](#input\_assessments\_enabled) | Boolean to enable Health Assessments such as Drift Detection on Workspace. | `bool` | `false` | no |
 | <a name="input_auto_apply"></a> [auto\_apply](#input\_auto\_apply) | Boolean to automatically run a Terraform apply after a successful Terraform plan. | `bool` | `false` | no |
-| <a name="input_custom_team_access"></a> [custom\_team\_access](#input\_custom\_team\_access) | Map of existing Team(s) and custom permissions to grant on Workspace. If used, all keys in the object must be specified. | <pre>map(<br>    object(<br>      {<br>        runs              = string<br>        variables         = string<br>        state_versions    = string<br>        sentinel_mocks    = string<br>        workspace_locking = bool<br>        run_tasks         = bool<br>      }<br>    )<br>  )</pre> | `{}` | no |
+| <a name="input_custom_team_access"></a> [custom\_team\_access](#input\_custom\_team\_access) | Map of existing Team(s) and custom permissions to grant on Workspace. If used, all keys in the object must be specified. | <pre>map(<br/>    object(<br/>      {<br/>        runs              = string<br/>        variables         = string<br/>        state_versions    = string<br/>        sentinel_mocks    = string<br/>        workspace_locking = bool<br/>        run_tasks         = bool<br/>      }<br/>    )<br/>  )</pre> | `{}` | no |
 | <a name="input_envvars"></a> [envvars](#input\_envvars) | Map of Environment variables to add to Workspace. | `map(string)` | `{}` | no |
 | <a name="input_envvars_ignore_changes"></a> [envvars\_ignore\_changes](#input\_envvars\_ignore\_changes) | Map of sensitive Environment variables to add to Workspace whereby changes made outside of Terraform will be ignored. | `map(string)` | `{}` | no |
 | <a name="input_envvars_sensitive"></a> [envvars\_sensitive](#input\_envvars\_sensitive) | Map of sensitive Environment variables to add to Workspace. | `map(string)` | `{}` | no |
@@ -275,7 +275,7 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 | <a name="input_file_triggers_enabled"></a> [file\_triggers\_enabled](#input\_file\_triggers\_enabled) | Boolean to filter Runs triggered via webhook (VCS push) based on `working_directory` and `trigger_prefixes`. | `bool` | `true` | no |
 | <a name="input_force_delete"></a> [force\_delete](#input\_force\_delete) | Boolean to allow deletion of the Workspace if there is a Terraform state that contains resources. | `bool` | `null` | no |
 | <a name="input_global_remote_state"></a> [global\_remote\_state](#input\_global\_remote\_state) | Boolean to allow all Workspaces within the Organization to remotely access the State of this Workspace. | `bool` | `false` | no |
-| <a name="input_notifications"></a> [notifications](#input\_notifications) | List of Notification objects to configure on Workspace. | <pre>list(<br>    object(<br>      {<br>        name             = string<br>        destination_type = string<br>        url              = optional(string)<br>        token            = optional(string)<br>        email_addresses  = optional(list(string))<br>        email_user_ids   = optional(list(string))<br>        triggers         = list(string)<br>        enabled          = bool<br>      }<br>    )<br>  )</pre> | `[]` | no |
+| <a name="input_notifications"></a> [notifications](#input\_notifications) | List of Notification objects to configure on Workspace. | <pre>list(<br/>    object(<br/>      {<br/>        name             = string<br/>        destination_type = string<br/>        url              = optional(string)<br/>        token            = optional(string)<br/>        email_addresses  = optional(list(string))<br/>        email_user_ids   = optional(list(string))<br/>        triggers         = list(string)<br/>        enabled          = bool<br/>      }<br/>    )<br/>  )</pre> | `[]` | no |
 | <a name="input_policy_set_names"></a> [policy\_set\_names](#input\_policy\_set\_names) | List of names of existing Policy Sets to add this Workspace into. | `list(string)` | `[]` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name of existing Project to create Workspace in. | `string` | `null` | no |
 | <a name="input_queue_all_runs"></a> [queue\_all\_runs](#input\_queue\_all\_runs) | Boolean setting for Workspace to automatically queue all Runs after creation. | `bool` | `true` | no |
@@ -293,7 +293,7 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 | <a name="input_trigger_patterns"></a> [trigger\_patterns](#input\_trigger\_patterns) | List of glob patterns that describe the files monitored for changes to trigger Runs in Workspace. Mutually exclusive with `trigger_prefixes`. Only available with TFC. | `list(string)` | `null` | no |
 | <a name="input_trigger_prefixes"></a> [trigger\_prefixes](#input\_trigger\_prefixes) | List of paths relative to the root of the VCS repo to filter on when `file_triggers_enabled` is `true`. | `list(string)` | `null` | no |
 | <a name="input_variable_set_names"></a> [variable\_set\_names](#input\_variable\_set\_names) | List of names of existing Variable Sets to add this Workspace into. | `list(string)` | `[]` | no |
-| <a name="input_vcs_repo"></a> [vcs\_repo](#input\_vcs\_repo) | Object containing settings to connect Workspace to a VCS repository. | <pre>object({<br>    identifier                 = string<br>    branch                     = optional(string, null)<br>    oauth_token_id             = optional(string, null)<br>    github_app_installation_id = optional(string, null)<br>    ingress_submodules         = optional(bool, false)<br>    tags_regex                 = optional(string, null)<br>  })</pre> | `null` | no |
+| <a name="input_vcs_repo"></a> [vcs\_repo](#input\_vcs\_repo) | Object containing settings to connect Workspace to a VCS repository. | <pre>object({<br/>    identifier                 = string<br/>    branch                     = optional(string, null)<br/>    oauth_token_id             = optional(string, null)<br/>    github_app_installation_id = optional(string, null)<br/>    ingress_submodules         = optional(bool, false)<br/>    tags_regex                 = optional(string, null)<br/>  })</pre> | `null` | no |
 | <a name="input_working_directory"></a> [working\_directory](#input\_working\_directory) | The relative path that Terraform will execute within. Defaults to the root of the repo. | `string` | `null` | no |
 | <a name="input_workspace_desc"></a> [workspace\_desc](#input\_workspace\_desc) | Description of Workspace. | `string` | `"Created by 'workspacer' Terraform module."` | no |
 | <a name="input_workspace_tags"></a> [workspace\_tags](#input\_workspace\_tags) | List of tag names to apply to Workspace. Tags must only contain letters, numbers, or colons. | `list(string)` | `[]` | no |

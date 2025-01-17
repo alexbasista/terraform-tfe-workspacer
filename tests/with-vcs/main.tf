@@ -10,11 +10,12 @@ module "workspacer_oauth_token" {
   workspace_tags = ["env:test", "app:acme"]
   project_name   = "Default Project" 
 
-  working_directory     = "/examples/with-vcs/tf-working-dir-test"
+  working_directory     = "/tests/with-vcs/tf-working-dir-test"
   auto_apply            = true
   file_triggers_enabled = true
-  trigger_patterns      = ["/examples/with-vcs/tf-working-dir-test/**/*"]
+  trigger_patterns      = ["/tests/with-vcs/tf-working-dir-test/**/*"]
   queue_all_runs        = true
+  force_delete          = true 
 
   vcs_repo = {
     identifier         = "alexbasista/terraform-tfe-workspacer"
@@ -33,10 +34,10 @@ module "workspacer_github_app" {
   workspace_tags = ["env:test", "app:acme"]
   project_name   = "Default Project" 
 
-  working_directory     = "/examples/with-vcs/tf-working-dir-test"
+  working_directory     = "/tests/with-vcs/tf-working-dir-test"
   auto_apply            = true
   file_triggers_enabled = true
-  trigger_patterns      = ["/examples/with-vcs/tf-working-dir-test/**/*"]
+  trigger_patterns      = ["/tests/with-vcs/tf-working-dir-test/**/*"]
   queue_all_runs        = true
 
   vcs_repo = {
