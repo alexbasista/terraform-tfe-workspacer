@@ -7,7 +7,7 @@ Terraform module to create, configure, and manage Workspaces in HCP Terraform or
 ```hcl
 module "workspacer" {
   source  = "alexbasista/workspacer/tfe"
-  
+  version = "x.x.x"
 
   organization   = "my-hcptf-or-tfe-org-name"
   workspace_name = "my-new-ws"
