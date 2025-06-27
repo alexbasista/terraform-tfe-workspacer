@@ -4,12 +4,16 @@ provider "tfe" {
 
 module "workspacer_vcs_oauth_token" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.12.0"
+  version = "0.13.0"
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-vcs-oauth-ex"
-  workspace_tags = ["env:test", "app:acme"]
-  project_name   = "Default Project"
+  workspace_map_tags = {
+    "app"   = "acme",
+    "env"   = "test",
+    "cloud" = "aws"
+  }
+  project_name = "Default Project"
 
   working_directory     = "</example/tf/directory>"
   auto_apply            = true
@@ -28,12 +32,16 @@ module "workspacer_vcs_oauth_token" {
 
 module "workspacer_vcs_github_app" {
   source  = "alexbasista/workspacer/tfe"
-  version = "0.12.0"
+  version = "0.13.0"
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-vcs-github-app-ex"
-  workspace_tags = ["env:test", "app:acme"]
-  project_name   = "Default Project"
+  workspace_map_tags = {
+    "app"   = "acme",
+    "env"   = "test",
+    "cloud" = "aws"
+  }
+  project_name = "Default Project"
 
   working_directory     = "/example/tf/directory"
   auto_apply            = false

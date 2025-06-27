@@ -3,13 +3,17 @@ provider "tfe" {
 }
 
 module "workspacer" {
-  source  = "../.."
+  source = "../.."
 
   organization   = var.organization
   workspace_name = "workspacer-basic-example"
   workspace_desc = "Created by 'workspacer' Terraform module."
-  workspace_tags = ["app:acme", "env:test", "cloud:aws"]
-  project_name   = "Default Project"
+  workspace_map_tags = {
+    "app"   = "acme",
+    "env"   = "test",
+    "cloud" = "aws"
+  }
+  project_name = "Default Project"
 
   tfvars = {
     example_var = "example_value"

@@ -9,7 +9,11 @@ module "workspacer_vcs_oauth_token" {
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-vcs-oauth-ex"
-  workspace_tags = ["env:test", "app:acme"]
+  workspace_map_tags = {
+    "app" = "acme", 
+    "env" = "test",
+    "cloud" = "aws"
+  }
   project_name   = "Default Project"
 
   working_directory     = "</example/tf/directory>"
@@ -36,7 +40,11 @@ module "workspacer_vcs_github_app" {
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-vcs-github-app-ex"
-  workspace_tags = ["env:test", "app:acme"]
+  workspace_map_tags = {
+    "app" = "acme", 
+    "env" = "test",
+    "cloud" = "aws"
+  }
   project_name   = "Default Project"
 
   working_directory     = "</example/tf/directory>"

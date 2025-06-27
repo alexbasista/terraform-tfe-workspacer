@@ -12,7 +12,11 @@ module "workspacer" {
   organization   = "my-hcptf-or-tfe-org-name"
   workspace_name = "my-new-ws"
   workspace_desc = "Description of my new Workspace."
-  workspace_tags = ["tag1", "tag2", "tagz"]
+  workspace_map_tags = {
+    "app" = "acme", 
+    "env" = "test",
+    "cloud" = "aws"
+  }
   project_name   = "Default Project"
 
   tfvars = {
@@ -230,7 +234,11 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | ~> 0.62 |
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.67.1 |
+
+## Modules
+
+No modules.
 
 ## Resources
 
@@ -296,6 +304,7 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 | <a name="input_vcs_repo"></a> [vcs\_repo](#input\_vcs\_repo) | Object containing settings to connect Workspace to a VCS repository. | <pre>object({<br/>    identifier                 = string<br/>    branch                     = optional(string, null)<br/>    oauth_token_id             = optional(string, null)<br/>    github_app_installation_id = optional(string, null)<br/>    ingress_submodules         = optional(bool, false)<br/>    tags_regex                 = optional(string, null)<br/>  })</pre> | `null` | no |
 | <a name="input_working_directory"></a> [working\_directory](#input\_working\_directory) | The relative path that Terraform will execute within. Defaults to the root of the repo. | `string` | `null` | no |
 | <a name="input_workspace_desc"></a> [workspace\_desc](#input\_workspace\_desc) | Description of Workspace. | `string` | `"Created by 'workspacer' Terraform module."` | no |
+| <a name="input_workspace_map_tags"></a> [workspace\_map\_tags](#input\_workspace\_map\_tags) | Map of key value tags to apply to Workspace. | `map(string)` | `{}` | no |
 | <a name="input_workspace_tags"></a> [workspace\_tags](#input\_workspace\_tags) | List of tag names to apply to Workspace. Tags must only contain letters, numbers, or colons. | `list(string)` | `[]` | no |
 
 ## Outputs

@@ -9,7 +9,7 @@ module "workspacer" {
   organization   = var.organization
   workspace_name = each.value.name
   workspace_desc = each.value.description
-  workspace_tags = each.value.tags
+  workspace_map_tags = each.value.tags
   project_name   = each.value.project_name
   vcs_repo       = each.value.vcs_repo
 }

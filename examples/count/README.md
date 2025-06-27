@@ -8,7 +8,11 @@ module "workspacer" {
 
   organization   = "<my-org-name>"
   workspace_name = "workspacer-count-ex-${count.index}"
-  workspace_tags = ["app:acme", "env:test", "cloud:aws"]
+  workspace_map_tags = {
+    "app" = "acme", 
+    "env" = "test",
+    "cloud" = "aws"
+  }
   project_name   = "Default Project"
 }
 ```

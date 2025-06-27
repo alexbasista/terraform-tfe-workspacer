@@ -105,6 +105,12 @@ variable "workspace_tags" {
   default     = []
 }
 
+variable "workspace_map_tags" {
+  type        = map(string)
+  description = "Map of key value tags to apply to Workspace."
+  default     = {}
+}
+
 variable "terraform_version" {
   type        = string
   description = "Version of Terraform to use for this Workspace."
