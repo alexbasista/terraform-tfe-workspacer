@@ -40,6 +40,12 @@ variable "auto_apply" {
   default     = false
 }
 
+variable "auto_apply_run_trigger" {
+  type        = bool
+  description = "Boolean to automatically run a Terraform apply created by a run trigger."
+  default     = false
+}
+
 variable "execution_mode" {
   type        = string
   description = "Execution mode of Workspace. Valid values are `remote`, `local`, or `agent`."
