@@ -6,13 +6,13 @@ module "workspacer_oauth_token" {
   source = "../.."
 
   organization   = var.organization
+  project_name   = "Default Project"
   workspace_name = "workspacer-vcs-oauth-ex"
   workspace_map_tags = {
     "app"   = "acme",
     "env"   = "test",
     "cloud" = "aws"
   }
-  project_name = "Default Project"
 
   working_directory     = "/tests/with-vcs/tf-working-dir-test"
   auto_apply            = true

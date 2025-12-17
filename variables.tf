@@ -176,10 +176,21 @@ variable "force_delete" {
   default     = null
 }
 
+variable "project_id" {
+  type        = string
+  description = "ID of existing Project to create Workspace in. Must be `null` if `project_name` is set."
+  default     = null
+}
+
 variable "project_name" {
   type        = string
-  description = "Name of existing Project to create Workspace in."
+  description = "Name of existing Project to create Workspace in. Must be `null` if `project_id` is set."
   default     = null
+
+  validation {
+    condition     = var.project_id != null ? var.project_name == null : true
+    error_message = "`project_id` and `project_name` are mutually exclusive; only one may be set."
+  }
 }
 
 #------------------------------------------------------------------------------

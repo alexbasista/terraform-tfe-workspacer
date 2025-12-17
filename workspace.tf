@@ -17,7 +17,7 @@ resource "tfe_workspace" "ws" {
   trigger_patterns              = var.trigger_patterns
   working_directory             = var.working_directory
   force_delete                  = var.force_delete
-  project_id                    = var.project_name != null ? data.tfe_project.ws[0].id : null
+  project_id                    = var.project_id != null ? var.project_id : (var.project_name != null ? data.tfe_project.ws[0].id : null)
 
   dynamic "vcs_repo" {
     for_each = var.vcs_repo != null ? [var.vcs_repo] : []
