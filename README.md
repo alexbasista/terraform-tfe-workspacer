@@ -239,13 +239,13 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
-| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | ~> 0.62 |
+| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | ~> 0.72 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | ~> 0.62 |
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | ~> 0.72 |
 
 ## Resources
 
