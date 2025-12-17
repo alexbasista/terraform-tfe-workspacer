@@ -6,6 +6,7 @@ module "workspacer" {
   source = "../.."
 
   organization   = var.organization
+  project_name   = "Default Project"
   workspace_name = "workspacer-basic-example"
   workspace_desc = "Created by 'workspacer' Terraform module."
   workspace_map_tags = {
@@ -13,7 +14,6 @@ module "workspacer" {
     "env"   = "test",
     "cloud" = "aws"
   }
-  project_name = "Default Project"
 
   tfvars = {
     example_var = "example_value"

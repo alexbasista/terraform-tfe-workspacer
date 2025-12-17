@@ -34,7 +34,19 @@ See the [examples](./examples) directory for more detailed example scenarios, an
 
 ### Projects
 
-To place the Workspace into an existing Project, set the input variable `project_name`.
+To place the Workspace into an existing Project, there are two options. These are mutually exclusive, so only one should be set at a time.
+
+#### By `project_id`
+
+This option is more performant at scale because the `tfe_project` data source is not invoked to lookup the Project ID by name, which saves a read request per Workspace.
+
+```hcl
+project_id = "prj-abcdefg123456789"
+```
+
+#### By `project_name`
+
+This option is more convenient at smaller scale, as you can pass in the Project name and the module fetch the ID via the `tfe_project` data source.
 
 ```hcl
 project_name = "my-project"
@@ -43,7 +55,6 @@ project_name = "my-project"
 ### With VCS
 
 The optional `vcs_repo` input variable expects a map of key/value pairs with up to six attributes.
-
 
 #### Using an OAuth Token
 
@@ -228,17 +239,13 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
-| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | ~> 0.62 |
+| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | ~> 0.72 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.67.1 |
-
-## Modules
-
-No modules.
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | ~> 0.72 |
 
 ## Resources
 
@@ -285,7 +292,8 @@ No modules.
 | <a name="input_global_remote_state"></a> [global\_remote\_state](#input\_global\_remote\_state) | Boolean to allow all Workspaces within the Organization to remotely access the State of this Workspace. | `bool` | `false` | no |
 | <a name="input_notifications"></a> [notifications](#input\_notifications) | List of Notification objects to configure on Workspace. | <pre>list(<br/>    object(<br/>      {<br/>        name             = string<br/>        destination_type = string<br/>        url              = optional(string)<br/>        token            = optional(string)<br/>        email_addresses  = optional(list(string))<br/>        email_user_ids   = optional(list(string))<br/>        triggers         = list(string)<br/>        enabled          = bool<br/>      }<br/>    )<br/>  )</pre> | `[]` | no |
 | <a name="input_policy_set_names"></a> [policy\_set\_names](#input\_policy\_set\_names) | List of names of existing Policy Sets to add this Workspace into. | `list(string)` | `[]` | no |
-| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name of existing Project to create Workspace in. | `string` | `null` | no |
+| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | ID of existing Project to create Workspace in. Must be `null` if `project_name` is set. | `string` | `null` | no |
+| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name of existing Project to create Workspace in. Must be `null` if `project_id` is set. | `string` | `null` | no |
 | <a name="input_queue_all_runs"></a> [queue\_all\_runs](#input\_queue\_all\_runs) | Boolean setting for Workspace to automatically queue all Runs after creation. | `bool` | `true` | no |
 | <a name="input_remote_state_consumer_ids"></a> [remote\_state\_consumer\_ids](#input\_remote\_state\_consumer\_ids) | List of existing Workspace IDs allowed to remotely access the State of Workspace. | `list(string)` | `null` | no |
 | <a name="input_run_trigger_source_workspaces"></a> [run\_trigger\_source\_workspaces](#input\_run\_trigger\_source\_workspaces) | List of existing Workspace names that will trigger runs on Workspace. | `list(string)` | `[]` | no |
