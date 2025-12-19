@@ -10,14 +10,14 @@ module "workspacer" {
   version = "x.x.x"
 
   organization   = "my-hcptf-or-tfe-org-name"
+  project_name   = "Default Project"
   workspace_name = "my-new-ws"
   workspace_desc = "Description of my new Workspace."
   workspace_map_tags = {
-    "app" = "acme", 
-    "env" = "test",
+    "app"   = "acme",
+    "env"   = "test",
     "cloud" = "aws"
   }
-  project_name   = "Default Project"
 
   tfvars = {
     teststring = "iamstring"
@@ -46,7 +46,7 @@ project_id = "prj-abcdefg123456789"
 
 #### By `project_name`
 
-This option is more convenient at smaller scale, as you can pass in the Project name and the module fetch the ID via the `tfe_project` data source.
+This option is more convenient at smaller scale, as you can pass in the Project name and the module fetches the ID via the `tfe_project` data source.
 
 ```hcl
 project_name = "my-project"
@@ -289,7 +289,7 @@ $ curl  --header "Authorization: Bearer $TFE_TOKEN \
 | <a name="input_execution_mode"></a> [execution\_mode](#input\_execution\_mode) | Execution mode of Workspace. Valid values are `remote`, `local`, or `agent`. | `string` | `null` | no |
 | <a name="input_file_triggers_enabled"></a> [file\_triggers\_enabled](#input\_file\_triggers\_enabled) | Boolean to filter Runs triggered via webhook (VCS push) based on `working_directory` and `trigger_prefixes`. | `bool` | `true` | no |
 | <a name="input_force_delete"></a> [force\_delete](#input\_force\_delete) | Boolean to allow deletion of the Workspace if there is a Terraform state that contains resources. | `bool` | `null` | no |
-| <a name="input_global_remote_state"></a> [global\_remote\_state](#input\_global\_remote\_state) | Boolean to allow all Workspaces within the Organization to remotely access the State of this Workspace. | `bool` | `false` | no |
+| <a name="input_global_remote_state"></a> [global\_remote\_state](#input\_global\_remote\_state) | Boolean to allow all Workspaces within the Organization to remotely access the State of this Workspace. | `bool` | `null` | no |
 | <a name="input_notifications"></a> [notifications](#input\_notifications) | List of Notification objects to configure on Workspace. | <pre>list(<br/>    object(<br/>      {<br/>        name             = string<br/>        destination_type = string<br/>        url              = optional(string)<br/>        token            = optional(string)<br/>        email_addresses  = optional(list(string))<br/>        email_user_ids   = optional(list(string))<br/>        triggers         = list(string)<br/>        enabled          = bool<br/>      }<br/>    )<br/>  )</pre> | `[]` | no |
 | <a name="input_policy_set_names"></a> [policy\_set\_names](#input\_policy\_set\_names) | List of names of existing Policy Sets to add this Workspace into. | `list(string)` | `[]` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | ID of existing Project to create Workspace in. Must be `null` if `project_name` is set. | `string` | `null` | no |

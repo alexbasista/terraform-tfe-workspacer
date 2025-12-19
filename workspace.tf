@@ -34,12 +34,16 @@ resource "tfe_workspace" "ws" {
 }
 
 resource "tfe_workspace_settings" "ws" {
+  count = (
+    var.execution_mode == null &&
+    var.global_remote_state == null &&
+    var.remote_state_consumer_ids == null
+  ) ? 0 : 1
+
   workspace_id              = tfe_workspace.ws.id
   execution_mode            = var.execution_mode
+  agent_pool_id             = var.execution_mode == "agent" ? var.agent_pool_id : null
   global_remote_state       = var.global_remote_state
   remote_state_consumer_ids = var.remote_state_consumer_ids
-
-
-  agent_pool_id = var.execution_mode == "agent" ? var.agent_pool_id : null
 }
 

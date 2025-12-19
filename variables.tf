@@ -17,17 +17,6 @@ variable "workspace_desc" {
   default     = "Created by 'workspacer' Terraform module."
 }
 
-variable "agent_pool_id" {
-  type        = string
-  description = "ID of existing Agent Pool to assign to Workspace. Only valid when `execution_mode` is set to `agent`."
-  default     = null
-
-  validation {
-    condition     = var.execution_mode == "agent" ? var.agent_pool_id != null : true
-    error_message = "Value must be set if `execution_mode` is set to `agent`."
-  }
-}
-
 variable "allow_destroy_plan" {
   type        = bool
   description = "Boolean setting to allow destroy plans on Workspace."
@@ -51,6 +40,22 @@ variable "execution_mode" {
   }
 }
 
+variable "agent_pool_id" {
+  type        = string
+  description = "ID of existing Agent Pool to assign to Workspace. Only valid when `execution_mode` is set to `agent`."
+  default     = null
+
+  validation {
+    condition     = var.execution_mode == "agent" ? var.agent_pool_id != null : true
+    error_message = "Value must be set if `execution_mode` is set to `agent`."
+  }
+
+  validation {
+    condition     = var.agent_pool_id != null ? var.execution_mode == "agent" : true
+    error_message = "Value cannot be set unless `execution_mode` is set to `agent`."
+  }
+}
+
 variable "assessments_enabled" {
   type        = bool
   description = "Boolean to enable Health Assessments such as Drift Detection on Workspace."
@@ -66,7 +71,7 @@ variable "file_triggers_enabled" {
 variable "global_remote_state" {
   type        = bool
   description = "Boolean to allow all Workspaces within the Organization to remotely access the State of this Workspace."
-  default     = false
+  default     = null
 }
 
 variable "remote_state_consumer_ids" {
