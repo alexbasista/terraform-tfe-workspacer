@@ -7,7 +7,7 @@ module "workspacer" {
 
   organization   = var.organization
   project_name   = "Default Project"
-  workspace_name = "workspacer-basic-example"
+  workspace_name = "workspacer-test-basic"
   workspace_desc = "Created by 'workspacer' Terraform module."
   workspace_map_tags = {
     "app"   = "acme",
