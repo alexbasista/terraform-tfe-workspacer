@@ -227,6 +227,19 @@ variable "envvars_ignore_changes" {
   default     = {}
 }
 
+variable "tfvars_files_prefix" {
+  type        = string
+  description = "Prefix for Terraform variable file paths added to Workspace."
+  # This has to be workspace-relative, so set a default that works with the expected directory structure of govuk-infrastructure, but can be overridden if needed.
+  default     = "../../variables/"
+}
+
+variable "tfvars_files" {
+  type        = list(string)
+  description = "List of file paths relative to /terraform/variables to load Terraform variables from."
+  default     = []
+}
+
 #------------------------------------------------------------------------------
 # Team Access
 #------------------------------------------------------------------------------
